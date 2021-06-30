@@ -1,0 +1,149 @@
+.bg-black {
+	background-color: #000 !important
+}
+
+header.masthead {
+	position: relative;
+	overflow: hidden;
+	padding-top: 4rem;
+}
+
+header.masthead .masthead-content {
+	z-index: 1;
+	position: relative
+}
+
+header.masthead .masthead-content .masthead-heading {
+	font-size: 4rem
+}
+
+header.masthead .masthead-content .masthead-subheading {
+	font-size: 2rem
+}
+
+header.masthead .bg-circle {
+	z-index: 0;
+	position: absolute;
+	border-radius: 100%;
+	background: linear-gradient(0deg, #ee0979 0, #ff6a00 100%)
+}
+
+a {
+    color: #0056b3 !important;
+    text-decoration: underline;
+}
+
+.grey-image {
+    filter: grayscale(1);
+}
+
+header.masthead .bg-circle-1 {
+	height: 90rem;
+	width: 90rem;
+	bottom: -55rem;
+	left: -55rem
+}
+
+header.masthead .bg-circle-2 {
+	height: 50rem;
+	width: 50rem;
+	top: -25rem;
+	right: -25rem
+}
+
+header.masthead .bg-circle-3 {
+	height: 20rem;
+	width: 20rem;
+	bottom: -10rem;
+	right: 5%
+}
+
+header.masthead .bg-circle-4 {
+	height: 30rem;
+	width: 30rem;
+	top: -5rem;
+	right: 35%
+}
+
+@media ( min-width :992px) {
+	header.masthead .masthead-content .masthead-heading {
+		font-size: 6rem;
+	}
+	header.masthead .masthead-content .masthead-subheading {
+		font-size: 4rem;
+	}
+}
+
+.flag {
+	max-width: 80%;
+	height: auto;
+	border: 1px solid black;
+}
+
+.flag-btn {
+	width: 40px;
+  	height: 40px;
+  	overflow: hidden;
+  	border-radius: 50%;
+}
+
+.flag-div {
+	width: 60%;
+}
+
+.choose-lang {
+	width: 100%;
+}
+
+.img-a {
+	max-width: 50%;
+	height: auto;
+}
+
+@media (max-width: 768px) {
+	.show-sm-screen {
+		display: block;
+	}
+	
+	.show-lg-screen {
+		display: none;
+	}
+	
+	.flag-div {
+		width: 80%;
+	}
+}
+
+@media (min-width: 769px) {
+	.show-sm-screen {
+		display: none;
+	}
+	
+	.show-lg-screen {
+		display: block;
+	}
+}
+
+.grey-background {
+	background-color: #efefef;
+}
+
+video {
+	width: 32vh;
+	height: auto;
+	border-radius: 5px;
+	border: 1.3px solid;
+}
+
+#scrollPlay, #goToScenarios, #scrollPlay:hover, #goToScenarios:hover{
+	background-color: #149CBC !important;
+	border-color: #149CBC !important;	
+}
+
+.btn-modal:active, .btn-modal:focus, .btn-modal:hover, .btn-modal {
+	background-color: transparent !important;
+	color: black !important;
+	border: 2px solid #428bca;
+	text-transform: none !important;
+	letter-spacing: 0.01rem !important;
+}

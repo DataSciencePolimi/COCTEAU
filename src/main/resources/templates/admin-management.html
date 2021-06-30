@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title th:text="#{admin-management.main-title}"></title>
+<link rel="icon" 
+      type="image/png" 
+      href="appimg/Logo-Fav.png">
+<link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/admin-management-page.css">
+<link rel="stylesheet" href="css/all.css">
+</head>
+
+<body>
+	<div class="page-content">
+		<header class="masthead text-center text-white">
+			<div class="header-content">
+				<div class="masthead-content">
+					<div class="container mb-3">
+						<h1 class="masthead-heading mb-0 font-weight-bolder" th:text="#{admin-management.main-title}"></h1>
+					</div>
+				</div>
+			</div>
+		</header>
+		
+		<div class="waves uncode-divider-wrap uncode-divider-wrap-bottom z_index_3">
+			<svg version="1.1" class="uncode-row-divider uncode-row-divider-swoosh-opacity" x="0px" y="0px" width="100%" height="20%" viewBox="0 0 240 24" enable-background="new 0 0 240 24" preserveAspectRatio="none">
+			<path fill="#efefef" fill-opacity="0.33" d="M240,24V0c-51.797,0-69.883,13.18-94.707,15.59c-24.691,2.4-43.872-1.17-63.765-1.08
+				c-19.17,0.1-31.196,3.65-51.309,6.58C15.552,23.21,4.321,22.471,0,22.01V24H240z"></path>
+			<path fill="#efefef" fill-opacity="0.33" d="M240,24V2.21c-51.797,0-69.883,11.96-94.707,14.16
+				c-24.691,2.149-43.872-1.08-63.765-1.021c-19.17,0.069-31.196,3.311-51.309,5.971C15.552,23.23,4.321,22.58,0,22.189V24h239.766H240
+				z"></path>
+			<path fill="#efefef" d="M240,24V3.72c-51.797,0-69.883,11.64-94.707,14.021c-24.691,2.359-43.872-3.25-63.765-3.17
+				c-19.17,0.109-31.196,3.6-51.309,6.529C15.552,23.209,4.321,22.47,0,22.029V24H240z"></path>
+			</svg>
+		</div>
+		
+		<div class="container bd-highlight mx-auto">
+			<div class="row mt-3">
+				<div class="col-8">
+					<form action="/createAdminProfile" method="post" id="createAdminProfile" class="mb-2 mx-auto">
+						<label for="usernameTextForm" th:text="#{admin-management.new-username}"></label>
+						<input class="form-control" type="text" id="createUsernameTextForm" name="createUsernameTextForm">
+						<div class="form-error">
+						    <span class="text-danger" id="username-error-creation" style="display:none"></span>
+					  	</div>
+						<label for="newPasswordTextForm" class="mt-2" th:text="#{admin-management.new-password}"></label>
+						<input class="form-control" type="password" id="createNewPasswordTextForm" name="createNewPasswordTextForm">
+						<div class="form-error">
+						    <span class="text-danger" id="new-password-error-creation" style="display:none"></span>
+					  	</div>
+						<label for="confirmNewPasswordTextForm" class="mt-2" th:text="#{admin-management.confirm-new-password}"></label>
+						<input class="form-control" type="password" id="createConfirmNewPasswordTextForm" name="createConfirmNewPasswordTextForm">
+						<div class="form-error">
+						    <span class="text-danger" id="confirm-password-error-creation" style="display:none"></span>
+					  	</div>
+						
+						<div id="errorTextField" class="mt-2"></div>
+					</form>
+				</div>
+				<div class="col-4 mt-4">
+					<div class="col-12">
+						<button type="submit" class="btn btn-primary col-12 mb-3" th:text="#{admin-management.submit-profile}" id="SubmitButtonCreateProfile" form="createAdminProfile"></button>
+						<button type="submit" class="btn btn-danger col-12" form="backForm" th:text="#{admin-management.back}"></button>
+						<form action="/scenario-panel" method="get" id="backForm">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="lang" th:text="#{lang}" style="display:none"></div>
+	
+	<footer class="pt-3 pb-4 bg-black">
+	</footer>
+	
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript"
+		src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/popper.js/1.14.1/umd/popper.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+	<script type="module" src="/js/js.cookie.js"></script>
+	<script type="text/javascript" src="/js/admin-management.js"></script>
+
+</body>
+
+</html>

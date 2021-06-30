@@ -1,0 +1,37 @@
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.input-form {
+	overflow: hidden;
+	resize: none;
+}
+
+.description-form {
+	resize: none;
+}
+
+.fix-dim-puzzle {
+	left: 2px;
+    bottom: 2px;
+}
+
+.sliderticks {
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 0 10px !important;
+}
+
+.sliderticks p {
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 1px !important;
+  background: #D3D3D3 !important;
+  height: 10px !important;
+  line-height: 40px !important;
+  margin: 0 0 20px 0 !important;
+}

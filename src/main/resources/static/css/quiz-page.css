@@ -1,0 +1,92 @@
+.input-form {
+	overflow: hidden;
+	resize: none;
+}
+
+h4 {
+	overflow-wrap: break-word;
+}
+
+.btn {
+	white-space: normal !important;
+}
+
+#questionTextDiv {
+	max-width: 90%;
+}
+
+.no-border {
+	border: 0px !important;
+}
+
+.no-background-color {
+	background-color: unset !important;
+}
+
+.no-padding {
+	padding: 0px;
+}
+
+.chevron {
+	color: #007bff;
+	float: right;
+	padding-left: 5px;
+}
+
+.progress {
+	width: 70%;
+}
+
+.progress-bar {
+	background-color: #17a2b8;
+}
+
+#answer1.btn-success:focus, #answer1.btn-info:focus {
+	box-shadow: 0 0 0 0.2rem rgba(237, 72, 72, .5)
+}
+
+#answer2.btn-success:focus, #answer2.btn-info:focus {
+	box-shadow: 0 0 0 0.2rem rgba(255, 120, 0, .5)
+}
+
+#answer3.btn-success:focus, #answer3.btn-info:focus {
+	box-shadow: 0 0 0 0.2rem rgba(255, 196, 0, .5)
+}
+
+#answer4.btn-success:focus, #answer4.btn-info:focus {
+	box-shadow: 0 0 0 0.2rem rgba(118, 213, 133, .5)
+}
+
+#answer5.btn-success:focus, #answer5.btn-info:focus {
+	box-shadow: 0 0 0 0.2rem rgba(66, 193, 87, .5)
+}
+
+#answer1.btn-success, #answer1.btn-success:hover, #answer1.btn-info:hover {
+	background-color: #ED4848;
+	border-color: #ED4848;
+}
+
+#answer2.btn-success, #answer2.btn-success:hover, #answer2.btn-info:hover {
+	background-color: #FF7800;
+	border-color: #FF7800;
+}
+
+#answer3.btn-success, #answer3.btn-success:hover, #answer3.btn-info:hover {
+	background-color: #FFC400;
+	border-color: #FFC400;
+}
+
+#answer4.btn-success, #answer4.btn-success:hover, #answer4.btn-info:hover {
+	background-color: #76D585;
+	border-color: #76D585;
+}
+
+#answer5.btn-success, #answer5.btn-success:hover, #answer5.btn-info:hover {
+	background-color: #42C157;
+	border-color: #42C157;
+}
+
+#submitButton, #submitButton:hover {
+	background-color: #149cbc !important;
+	border-color: #149cbc !important;
+}

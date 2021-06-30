@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title th:text="#{index.main-title}"></title>
+<link rel="icon" 
+      type="image/png" 
+      href="appimg/Logo-Fav.png">
+<link href="/fontawesome-free/css/all.css" rel="stylesheet">
+<link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/index-page.css">
+<link rel="stylesheet" href="css/all.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+</head>
+
+<body>
+	<div class="page-content">
+		<header class="masthead text-center text-white">
+			<div class="header-content">
+				<img class="img-fluid col-11 col-sm-7 col-lg-4 col-md-7 mb-4" src="../appimg/Logo-trigger.png"/>
+				<img class="img-fluid col-6 col-sm-3 col-lg-2 col-md-3 mb-4" src="../appimg/Logo-cocteau.png"/>
+				<div class="masthead-content">
+					<div class="container mb-3">
+						<h1 class="masthead-heading mb-0 font-weight-bolder" th:text="#{index.title}"></h1>
+						<h2 class="masthead-subheading mb-0 font-weight-bolder small-h4" th:text="#{index.subtitle}"></h2>
+					</div>
+				</div>
+			</div>
+		</header>
+		
+		<div class="uncode-divider-wrap uncode-divider-wrap-bottom z_index_3">
+				<svg version="1.1" class="uncode-row-divider uncode-row-divider-swoosh-opacity" x="0px" y="0px" width="100%" height="20%" viewBox="0 0 240 24" enable-background="new 0 0 240 24" preserveAspectRatio="none">
+				<path fill="#efefef" fill-opacity="0.33" d="M240,24V0c-51.797,0-69.883,13.18-94.707,15.59c-24.691,2.4-43.872-1.17-63.765-1.08
+					c-19.17,0.1-31.196,3.65-51.309,6.58C15.552,23.21,4.321,22.471,0,22.01V24H240z"></path>
+				<path fill="#efefef" fill-opacity="0.33" d="M240,24V2.21c-51.797,0-69.883,11.96-94.707,14.16
+					c-24.691,2.149-43.872-1.08-63.765-1.021c-19.17,0.069-31.196,3.311-51.309,5.971C15.552,23.23,4.321,22.58,0,22.189V24h239.766H240
+					z"></path>
+				<path fill="#efefef" d="M240,24V3.72c-51.797,0-69.883,11.64-94.707,14.021c-24.691,2.359-43.872-3.25-63.765-3.17
+					c-19.17,0.109-31.196,3.6-51.309,6.529C15.552,23.209,4.321,22.47,0,22.029V24H240z"></path>
+				</svg>
+			</div>
+		
+		<section class="bg-grey">
+			<div class="container">
+				<div class="row align-items-center pt-3">
+					<div class="col-lg-6 order-lg-1 mt-3">
+						<div class="text-center">
+							<h5 class="text-left" th:text="#{index.brief-1}"></h5>
+							<h5 class="text-left" th:text="#{index.brief-2}"></h5><br>
+							<h5 class="text-left" th:text="#{index.brief-3}"></h5>
+							<h5 class="text-left">
+								<ul>
+									<li th:text="#{index.brief-list-1}"></li>
+									<li th:text="#{index.brief-list-2}"></li>
+									<li th:text="#{index.brief-list-3}"></li>
+									<li th:text="#{index.brief-list-4}"></li>
+								</ul>
+							</h5>
+						</div>
+					</div>
+					<div class="col-lg-6 mt-3 order-lg-1 text-center pb-2">
+						<img class="col-lg-11" src="appimg/COCTEAU_Concept.png">
+					</div>
+				</div>
+			</div>
+			<div class="uncode-divider-wrap uncode-divider-wrap-bottom z_index_3">
+				<svg version="1.1" class="uncode-row-divider uncode-row-divider-swoosh-opacity" x="0px" y="0px" width="100%" height="20%" viewBox="0 0 240 24" enable-background="new 0 0 240 24" preserveAspectRatio="none">
+				<path fill="#ffffff" fill-opacity="0.33" d="M240,24V0c-51.797,0-69.883,13.18-94.707,15.59c-24.691,2.4-43.872-1.17-63.765-1.08
+					c-19.17,0.1-31.196,3.65-51.309,6.58C15.552,23.21,4.321,22.471,0,22.01V24H240z"></path>
+				<path fill="#ffffff" fill-opacity="0.33" d="M240,24V2.21c-51.797,0-69.883,11.96-94.707,14.16
+					c-24.691,2.149-43.872-1.08-63.765-1.021c-19.17,0.069-31.196,3.311-51.309,5.971C15.552,23.23,4.321,22.58,0,22.189V24h239.766H240
+					z"></path>
+				<path fill="#ffffff" d="M240,24V3.72c-51.797,0-69.883,11.64-94.707,14.021c-24.691,2.359-43.872-3.25-63.765-3.17
+					c-19.17,0.109-31.196,3.6-51.309,6.529C15.552,23.209,4.321,22.47,0,22.029V24H240z"></path>
+				</svg>
+			</div>
+		</section>
+		
+		<section class="text-center mx-auto py-5 justify-content-center bg-white" id="language-selection" style="display:none">
+			<h2 class="masthead-subheading mb-3 font-weight-bolder small-h4" th:text="#{index.select-language}"></h2>
+			<div class="card-deck justify-content-center">
+				<div class="card my-3 mx-auto" th:each="l : ${langs}">
+					<img class="card-img-top flag-size rounded lang-item" th:src="${'appimg/flag-of-' + l.key + '.png'}" th:data-lang="${l.key}">
+				</div>
+			</div>
+		</section>
+		
+		<div class="form-row justify-content-center" id="consent-elements" style="display:none">
+			<section class="consent_buttons pb-2">
+				<div class="consent-text container text-center">
+					<h5 class="mt-3 text-center" th:text="#{index.cookie-msg}"></h5>
+				</div>
+				<div class="container text-center my-4 col-10 col-md-8 col-xl-7 privacy-container">
+					<input type="checkbox" id="privacy-accept" name="privacy-accept" value="accept" th:utext="#{index.privacy}">
+				</div>
+				<div class="container text-center col-10 col-md-8 col-xl-7" id="active-consent-cont"></div>
+			</section>
+		</div>
+		
+		<div id="login-elements-div"></div>
+	</div>
+	
+	<hr class="col-8">
+	<h4 class="text-center my-1">Partners</h4>
+	<hr class="col-8">
+	<div class="row justify-content-center px-2 my-2">
+		<img class="img-fluid col-8 col-sm-12 col-lg-2 col-md-2 mb-4" src="../appimg/Logo-Polimi.png">
+		<img class="img-fluid col-8 col-sm-12 col-lg-3 col-md-3 mb-4" src="../appimg/Logo-CEPS.jpg">
+	</div>
+	
+	<div id="lang" th:text="#{lang}" style="display:none"></div>
+	
+	<footer class="pt-3 pb-4 bg-black">
+		<div class="container text-center">
+			<h4 class="m-0 text-center small show-sm-screen inform">
+				<a href="gdpr/cocteau-privacy-notice.pdf" target="_blank" class="inform" th:text="#{index.treatment-sm}"></a> - 
+				<a href="https://trigger-project.eu/" target="_blank" class="inform" th:text="#{index.trigger-project}"></a> -
+				<a href="about" class="inform" th:text="#{index.about}"></a> -
+				<span class="inform" th:utext="#{index.fontawesome}"></span>
+			</h4>
+			<h4 class="m-0 text-center small show-lg-screen inform">
+				<a href="gdpr/cocteau-privacy-notice.pdf" target="_blank" class="inform" th:text="#{index.treatment-lg}"></a> - 
+				<a href="https://trigger-project.eu/" target="_blank" class="inform" th:text="#{index.trigger-project}"></a> -
+				<a href="about" class="inform" th:text="#{index.about}"></a> -
+				<span class="inform" th:utext="#{index.fontawesome}"></span>
+			</h4>
+		</div>
+	</footer>
+	
+	<div class="modal" tabindex="-1" role="dialog">
+	  	<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<h5 class="modal-title" th:text="#{index.cookie-error-modal-title}"></h5>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+		      	<div class="modal-body">
+		        	<p th:text="#{index.cookie-error-modal-text}"></p>
+		      	</div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-primary" data-dismiss="modal" th:text="#{index.cookie-error-modal-button}"></button>
+		      	</div>
+    		</div>
+	  	</div>
+	</div>
+	
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript"
+		src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/popper.js/1.14.1/umd/popper.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+	<script type="module" src="/js/js.cookie.js"></script>
+	<script type="text/javascript" src="/js/cookieconsent.min.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+</body>
+</html>

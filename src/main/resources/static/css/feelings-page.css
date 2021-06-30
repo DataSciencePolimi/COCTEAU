@@ -1,0 +1,51 @@
+textarea {
+	resize: none;
+}
+
+.vote, .card-header, .card, .base {
+	border-color: #17a2b8;
+}
+
+.emoji {
+	float: left;
+	padding-left: 25%;
+	color: white;
+}
+
+.btn-group {
+	width: 100%;
+}
+
+.btn-secondary, .btn-secondary:hover, .card-header {
+	background-color: #17a2b8;
+	border-color: #17a2b8;
+}
+
+.emotion-text {
+	color: white;
+	position: absolute;
+	left: 55% !important;
+	top: 1.1em !important;
+/* 	transform: translate(0%, -50%); */
+	font-size: 1.3em !important;
+}
+
+@media (max-width: 768px) {
+	.show-sm-screen {
+		display: flex !important;
+	}
+	
+	.show-lg-screen {
+		display: none !important;
+	}
+}
+
+@media (min-width: 769px) {
+	.show-sm-screen {
+		display: none !important;
+	}
+	
+	.show-lg-screen {
+		display: flex !important;
+	}
+}

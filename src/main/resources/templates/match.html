@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title th:text="#{match.main-title}"></title>
+<link rel="icon" 
+      type="image/png" 
+      href="appimg/Logo-Fav.png">
+
+<link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="/fontawesome-free/css/all.css" rel="stylesheet">
+<link href="css/all.css" rel="stylesheet">
+<link href="css/match-page.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div class="col-12 col-sm-10 col-lg-8 col-xl-6 text-center mx-auto">
+		<div class="d-flex align-items-center justify-content-center py-3 mx-2">
+			<span class="fa-stack fa-2x">
+				<i class="far fa-circle fa-stack-2x fix-dim fas-btn"></i>
+				<i class="fas fa-dice fa-stack-1x fas-btn"></i>
+			</span>
+			<h1 class="font-weight-bolder paired" th:text="#{match.title}"></h1>
+		</div>
+		
+		<h4 class="text-center mx-4 small-h4" th:text="#{match.subtitle-1}"></h4>
+		<h4 class="text-center mx-4 small-h4" th:text="#{match.subtitle-2}"></h4>
+		
+		<div class="col-8 mx-auto">
+			<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#scenarioDesc" aria-expanded="false" aria-controls="scenarioDesc" th:inline="text">
+				[[#{match.scenario-description}]]
+				<div class="chevron-scenario">
+					<i class="fas fa-chevron-right"></i>
+				</div>
+		    </button>
+			
+			<div id="scenarioDesc" class="collapse mb-2" aria-labelledby="scenarioDesc">
+	      		<div class="col-12 mx-auto py-2" th:text="${scenarioDescription}">
+		      	</div>
+		    </div>
+			
+		</div><br>
+		
+		
+		<form action="/saveGuesses" th:object="${new_match}" method="post" class="range-field" id="matchForm">
+			
+			<input type="hidden" th:field="*{visionChallenger}">
+			
+			<div id='visionInfo'>
+				<div id='imageDiv'>
+					<img id="matchedPic" th:src="${new_match.visionChallenger.img}"/>
+				</div>
+				<div class="mt-3" id='keywordDiv'>
+					<h4 class="text-center pb-3 mx-4 small-h4" th:text="#{match.keywords}"></h4>
+					<ul class = "list-group text-center">
+						<li class = "list-group-item ellipsis" th:each='vk : ${new_match.visionChallenger.keywordCollection}' th:text="${vk.keyword.keyword}"></li>
+					</ul>
+				</div>
+			</div>
+		
+			<input type="hidden" th:field="*{firstDimGuess}">
+			<input type="hidden" th:field="*{secondDimGuess}">
+			
+			<div id='playerGuesses' class = "my-3">
+			
+				<div class="row d-flex align-items-center justify-content-center pb-3 mx-3">
+					<span class="fa-stack fa-2x col-12 col-lg-2 mb-2">
+						<i class="far fa-circle fa-stack-2x fas-btn"></i>
+						<i class="fas fa-comment fa-stack-1x fas-btn"></i>
+					</span>
+					<h4 class="font-weight-bolder small-h4 paired col-12 col-lg-8" th:text="#{match.guess}"></h4>
+				</div>
+			
+				<h4 class="small-h4" th:text="${firstDimName}"></h4>
+				<div class="d-flex justify-content-center align-content-center mt-2 mb-4 divSlider">
+					<div class="pr-1 bd-highlight font-weight-bold indigo-text" id="label_first_minus">
+						<i class="fas fa-minus-circle fa-2x fa-blue-symbol mb-2"></i>
+					</div>
+					<div class="col-11">
+						<input id="firstDim_g" class="border-0 slider" type="range" min="1" max="5" step="1" value="1"/>
+						<div class="sliderticks mt-2 font-weight-bold">
+							<p>1</p>
+							<p>2</p>
+							<p>3</p>
+							<p>4</p>
+							<p>5</p>
+						</div>
+					</div>
+					<div class="pl-1 bd-highlight font-weight-bold indigo-text" id="label_first_plus">
+						<i class="fas fa-plus-circle fa-2x fa-blue-symbol"></i>
+					</div>
+				</div>
+				
+				<h4 class="small-h4 mt-5" th:text="${secondDimName}"></h4>
+				<div class="d-flex justify-content-center align-content-center my-4 divSlider">
+					<div class="pr-1 bd-highlight font-weight-bold indigo-text" id="label_second_minus">
+						<i class="fas fa-minus-circle fa-2x fa-blue-symbol mb-2"></i>
+					</div>
+					<div class="col-11">
+						<input id="secondDim_g" class="border-0 slider" type="range" min="1" max="5" step="1" value="1"/>
+						<div class="sliderticks mt-2 font-weight-bold">
+							<p>1</p>
+							<p>2</p>
+							<p>3</p>
+							<p>4</p>
+							<p>5</p>
+						</div>
+					</div>
+					<div class="pl-1 bd-highlight font-weight-bold indigo-text" id="label_second_plus">
+						<i class="fas fa-plus-circle fa-2x fa-blue-symbol"></i>
+					</div>
+				</div>
+				
+				<div class="mt-5">
+					<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#sliderDesc" aria-expanded="false" aria-controls="sliderDesc" th:inline="text">
+						[[#{vision.slider-collapse}]]
+						<div class="chevron-sliders">
+							<i class="fas fa-chevron-right"></i>
+						</div>
+				    </button>
+					
+					<div id="sliderDesc" class="collapse mb-2" aria-labelledby="sliderDesc">
+			      		<div class="col-12 mx-auto py-2" th:text="${firstDimDesc}">
+				      	</div>
+				      	<div class="col-12 mx-auto py-2" th:text="${secondDimDesc}">
+				      	</div>
+				    </div>
+					
+				</div>
+				
+				<div id="toBeHidden">
+					<div>
+						<button type="button" class="btn btn-primary btn-xl rounded-pill my-2 mx-auto" id="challengerInfo" onclick='showChallengerVision();'>
+							<div class="d-flex align-items-center">
+								<i class="fas fa-2x fa-check"></i>
+								<span class="ml-2" th:text="#{match.guess-opinion}"></span>
+							</div>
+						</button>
+					</div>
+					<div th:if="${!goToInDepth}">
+						<button th:if="${played}" type="button" class="btn btn-primary btn-xl rounded-pill mb-1 mx-2" id="end-button-pre" form="change-page-button">
+							<div class="d-flex align-items-center">
+								<i class="fas fa-2x fa-newspaper"></i>
+								<span class="ml-2" th:text="#{match.button-feed}"></span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+			
+			<div id='challengerVision' style="display: none" class="mb-3">
+				<h4 class="text-center small-h4" th:text="#{match.chall-opinion}"></h4>
+				<h4 class="small-h4" th:text="${firstDimName}"></h4>
+				<div class="d-flex justify-content-center align-content-center my-4 divSlider">
+					<div class="col-11">
+						<input id="firstDimChallenger" class="border-0 slider-green" type="range" min="1" max="5" step="1" th:field="*{visionChallenger.firstDim}" disabled="true"/>
+						<div class="sliderticks mt-2 font-weight-bold">
+							<p>1</p>
+							<p>2</p>
+							<p>3</p>
+							<p>4</p>
+							<p>5</p>
+						</div>
+					</div>
+				</div>
+				
+				<h4 class="small-h4 mt-5" th:text="${secondDimName}"></h4>
+				<div class="d-flex justify-content-center align-content-center my-4 divSlider">
+					<div class="col-11">
+						<input id="secondDimChallenger" class="border-0 slider-green" type="range" min="1" max="5" step="1" th:field="*{visionChallenger.secondDim}" disabled="true"/>
+						<div class="sliderticks mt-2 font-weight-bold">
+							<p>1</p>
+							<p>2</p>
+							<p>3</p>
+							<p>4</p>
+							<p>5</p>
+						</div>
+					</div>
+				</div>
+				
+				<h4 class="font-weight-bolder" id="pointsEarned"></h4>
+			</div>
+		</form>
+		<div id='challengerVisionButtons' style="display: none" class="mb-3">
+			<form action="/changePage" method="get" id="change-page-button">
+				<input type="hidden" value="" name="button-pressed" id="button-pressed">
+				<input type="hidden" th:value="${goToInDepth}" name="goToInDepth">
+				<input type="hidden" th:value="${idScenario}" name="idScenario">
+				<input type="hidden" th:value="${feelingsAvailability}" name="feelingsAvailability">				
+			</form>
+					
+			<div>
+				<div class="d-flex justify-content-center">
+					<button class="btn btn-primary btn-xl rounded-pill mb-1 mx-1" id="in-depth-button" form="change-page-button">
+						<div class="d-flex align-items-center">
+							<i class="fas fa-2x fa-puzzle-piece"></i>
+							<span class="ml-2" th:text="#{match.button-continue}"></span>
+						</div>
+					</button>
+				</div>
+				<div th:if="${!goToInDepth and !feelingsAvailability}" class="d-flex justify-content-center">
+					<button class="btn btn-primary btn-xl rounded-pill mt-3 mb-1 mx-2" id="again-button" form="change-page-button">
+						<div class="d-flex align-items-center">
+							<i class="fas fa-2x fa-dice"></i>
+							<span class="ml-2" th:text="#{match.button-game}"></span>
+						</div>
+					</button>
+					
+					<button th:if="${playedEnd}" class="btn btn-primary btn-xl rounded-pill mt-3 mb-1 mx-2" id="end-button" form="change-page-button">
+						<div class="d-flex align-items-center">
+							<i class="fas fa-2x fa-newspaper"></i>
+							<span class="ml-2" th:text="#{match.button-feed}"></span>
+						</div>
+					</button>
+				</div>
+				<div th:if="${!goToInDepth and feelingsAvailability}" class="d-flex justify-content-center">
+					<button class="btn btn-primary btn-xl rounded-pill mt-3 mb-1 mx-1" id="again-button" form="change-page-button">
+						<div class="d-flex align-items-center">
+							<i class="fas fa-2x fa-dice-d20"></i>
+							<span class="ml-2" th:text="#{match.button-feelings}"></span>
+						</div>
+					</button>
+				</div>
+				
+			</div>
+		</div>
+		<div id="lang" th:text="#{lang}" style="display:none"></div>
+	</div>
+	
+	<input type="hidden" th:value="${firstTime}" id="firstTime">
+	
+	<div id="firstTimeInfoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredScrollableTitle" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="firstTimeInfoModalTitle" th:text="#{match.intro-title}"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p th:text="#{match.intro-msg2}"></p>
+					<p th:text="#{match.intro-msg3}"></p>
+					<p th:text="#{match.intro-msg4}"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" th:text="#{tutorial.confirm-button}"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript"
+		src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/popper.js/1.14.1/umd/popper.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="/js/matchManagement.js"></script>
+	<script type="module"
+		src="/js/js.cookie.js"></script>
+</body>
+
+</html>

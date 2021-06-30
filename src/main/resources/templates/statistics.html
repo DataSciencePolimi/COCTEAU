@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title th:text="#{statistics.main-title}"></title>
+<link rel="icon" 
+      type="image/png" 
+      href="appimg/Logo-Fav.png">
+
+<link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="css/all.css" rel="stylesheet">
+<link href="css/statistics-page.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/8f38fb007f.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+</head>
+
+<body>
+	<div class="d-flex align-items-center justify-content-center py-3 mx-2" id="first-div">
+		<span class="fa-stack fa-2x">
+			<i class="far fa-circle fa-stack-2x fas-btn"></i>
+			<i class="fas fa-chart-area fa-stack-1x fas-btn"></i>
+		</span>
+		<h1 class="font-weight-bolder paired ml-2" th:text="#{statistics.title}"></h1>
+	</div>
+	
+	<h4 class="text-center mx-3 small-h4"  th:text="#{statistics.subtitle-1}">
+	</h4>
+	
+	<div class="col-12 col-sm-11 col-lg-9 col-xl-7 text-center mx-auto" id="graph-div">
+	
+	</div>
+	
+	<div class="col-12 col-sm-11 col-lg-9 col-xl-7 text-center mx-auto">
+		<form action="/feed" th:object="${vision}" method="post" id="toFeed">
+			<input type="hidden" th:value="${scenarioId}" name="scenarioId">
+		</form>
+		
+		<h4 class="text-center mx-3 small-h4" th:text="#{statistics.before}"></h4>
+		<div class="btn-group mb-3" role="group" aria-label="emoji buttons" id="emojiGroup">
+			<button type="button" class="btn btn-secondary vote px-0" id="super_bad_user_bef" data-vote="1">
+				<i class="fas fa-3x fa-tired my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-bad}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="bad_user_bef" data-vote="2">
+				<i class="fas fa-3x fa-frown my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-scared}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="neutral_user_bef" data-vote="3">
+				<i class="fas fa-3x fa-meh my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-neutral}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="good_user_bef" data-vote="4">
+				<i class="fas fa-3x fa-smile my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-hopeful}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="super_good_user_bef" data-vote="5">
+				<i class="fas fa-3x fa-laugh-beam my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-good}"></h4>
+			</button>
+		</div>
+		
+		<h4 class="text-center mx-3 small-h4" th:text="#{statistics.after}"></h4>
+		<div class="btn-group mb-3" role="group" aria-label="emoji buttons" id="emojiGroup">
+			<button type="button" class="btn btn-secondary vote px-0" id="super_bad_user_aft" data-vote="1">
+				<i class="fas fa-3x fa-tired my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-bad}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="bad_user_aft" data-vote="2">
+				<i class="fas fa-3x fa-frown my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-scared}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="neutral_user_aft" data-vote="3">
+				<i class="fas fa-3x fa-meh my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-neutral}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="good_user_aft" data-vote="4">
+				<i class="fas fa-3x fa-smile my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-hopeful}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="super_good_user_aft" data-vote="5">
+				<i class="fas fa-3x fa-laugh-beam my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-good}"></h4>
+			</button>
+		</div>
+		
+		<h4 class="text-center mx-3 small-h4" th:text="#{statistics.community-before}"></h4>
+		<div class="btn-group mb-3" role="group" aria-label="emoji buttons" id="emojiGroup">
+			<button type="button" class="btn btn-secondary vote px-0" id="super_bad_comm_bef" data-vote="1">
+				<i class="fas fa-3x fa-tired my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-bad}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="bad_comm_bef" data-vote="2">
+				<i class="fas fa-3x fa-frown my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-scared}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="neutral_comm_bef" data-vote="3">
+				<i class="fas fa-3x fa-meh my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-neutral}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="good_comm_bef" data-vote="4">
+				<i class="fas fa-3x fa-smile my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-hopeful}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="super_good_comm_bef" data-vote="5">
+				<i class="fas fa-3x fa-laugh-beam my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-good}"></h4>
+			</button>
+		</div>
+		
+		<h4 class="text-center mx-3 small-h4" th:text="#{statistics.community-after}"></h4>
+		<div class="btn-group mb-3" role="group" aria-label="emoji buttons" id="emojiGroup">
+			<button type="button" class="btn btn-secondary vote px-0" id="super_bad_comm_aft" data-vote="1">
+				<i class="fas fa-3x fa-tired my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-bad}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="bad_comm_aft" data-vote="2">
+				<i class="fas fa-3x fa-frown my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-scared}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="neutral_comm_aft" data-vote="3">
+				<i class="fas fa-3x fa-meh my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-neutral}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="good_comm_aft" data-vote="4">
+				<i class="fas fa-3x fa-smile my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-hopeful}"></h4>
+			</button>
+			<button type="button" class="btn btn-secondary vote px-0" id="super_good_comm_aft" data-vote="5">
+				<i class="fas fa-3x fa-laugh-beam my-2 emoji"></i>
+				<h4 class="emoji-text show-lg-screen" th:text="#{feelings.button-good}"></h4>
+			</button>
+		</div>
+		
+		<button class="btn btn-primary btn-xl rounded-pill mb-3" id="end-button" form="toFeed">
+			<div class="d-flex align-items-center">
+				<i class="fas fa-2x fa-newspaper"></i>
+				<span class="ml-2" th:text="#{vision.button-feed}"></span>
+			</div>
+		</button>
+	</div>
+	
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript"
+		src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/popper.js/1.14.1/umd/popper.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="/js/orientation.js"></script>
+	<script type="module"
+		src="/js/js.cookie.js"></script>
+	<script type="text/javascript"
+		src="/js/statistics.js"></script>
+</body>
+</html>

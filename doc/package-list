@@ -1,0 +1,11 @@
+Application
+Application.Configuration
+Application.Controller
+Application.Domain
+Application.Exception
+Application.Filter
+Application.Handler
+Application.Management
+Application.Repository
+Application.Utils
+tocchetti_corti_ceps.tocchetti_corti_ceps

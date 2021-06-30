@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title th:text="#{error.main-title}"></title>
+<link rel="icon" 
+      type="image/png" 
+      href="appimg/Logo-Fav.png">
+<link href="/fontawesome-free/css/all.css" rel="stylesheet">
+<link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/all.css">
+<link rel="stylesheet" href="css/error-page.css">
+</head>
+
+<body>
+	<header class="row h-100 align-items-center">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-10 col-sm-10 col-md-5 col-lg-5 mx-auto text-center mb-5">
+						<i class="fas fa-bug fa-10x"></i>
+					</div>
+					<div class="col-10 col-sm-10 col-md-7 col-lg-7 mx-auto">
+						<h1 class="masthead-heading font-weight-bolder mt-3" th:text="#{error.title}"></h1>
+						<div th:if="${errorType == 'GetCanonicalPathException'}" class="p-1">
+							<p><h2 class="masthead-subheading my-2" th:text="#{error.title-GetCanonicalPathException}"></h2><span th:text="#{error.paragraph-GetCanonicalPathException}"></span></p>
+						</div>
+						<div th:if="${errorType == 'SQLException'}" class="p-1">
+							<p><h2 class="masthead-subheading my-2" th:text="#{error.title-SQLException}"></h2><span th:text="#{error.paragraph-SQLException}"></span></p>
+						</div>
+						<div th:if="${errorType == 'PictureCreationException'}" class="p-1">
+							<p><h2 class="masthead-subheading my-2" th:text="#{error.title-PictureCreationException}"></h2><span th:text="#{error.paragraph-PictureCreationException}"></span></p>
+						</div>
+						<div th:if="${errorType == 'JarAccessException'}" class="p-1">
+							<p><h2 class="masthead-subheading my-2" th:text="#{error.title-JarAccessException}"></h2><span th:text="#{error.paragraph-JarAccessException}"></span></p>
+						</div>
+						<div th:if="${errorType == 'PictureUploadException'}" class="p-1">
+							<p><h2 class="masthead-subheading my-2" th:text="#{error.title-PictureUploadException}"></h2><span th:text="#{error.paragraph-PictureUploadException}"></span></p>
+						</div>
+						<div th:if="${errorType == 'IOException'}" class="p-1">
+							<p><h2 class="masthead-subheading my-2" th:text="#{error.title-IOException}"></h2><span th:text="#{error.paragraph-IOException}"></span></p>
+						</div>
+						<div th:if="${errorType == 'FileNotFoundException'}" class="p-1">
+							<p><h2 class="masthead-subheading my-2" th:text="#{error.title-FileNotFoundException}"></h2><span th:text="#{error.paragraph-FileNotFoundException}"></span></p>
+						</div>
+						<div th:if="${errorType == 'IllegalArgumentException'}" class="p-1">
+							<p><h2 class="masthead-subheading my-2" th:text="#{error.title-IllegalArgumentException}"></h2><span th:text="#{error.paragraph-IllegalArgumentException}"></span></p>
+						</div>
+						<div th:if="${errorType == 'TranslateException'}" class="p-1">
+							<p><h2 class="masthead-subheading my-2" th:text="#{error.title-TranslateException}"></h2><span th:text="#{error.paragraph-TranslateException}"></span></p>
+						</div>
+						<div th:if="${errorType == 'UnsplashConnectionException'}" class="p-1">
+							<p><h2 class="masthead-subheading my-2" th:text="#{error.title-UnsplashConnectionException}"></h2><span th:text="#{error.paragraph-UnsplashConnectionException}"></span></p>
+						</div>
+						<div class="ml-3 p-1">
+							<a href="/" class="btn btn-primary btn-xl rounded-pill mt-5" th:text="#{error.back}"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+	</header>
+	
+	
+
+	<script type="text/javascript"
+		src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/popper.js/1.14.1/umd/popper.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

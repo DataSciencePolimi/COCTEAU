@@ -1,0 +1,26 @@
+<html>
+	<body>		
+		<div class="card" th:fragment="content" th:with="scenario=${scenario}">
+			<img class="card-img-top" th:src="${scenario.img}" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title font-weight-bold" th:text="${scenario.title}"></h5>
+				<hr/>
+				<p class="card-text s-description-clamp" th:classappend="${scenario.imgCredits != ''} ? mb-1 : mb-3" th:text="${scenario.description}"></p>
+				<footer th:if="${scenario.imgCredits != ''}" class="blockquote-footer mb-3 text-left">
+					<th:block th:if="${scenario?.authorName}">
+						<span th:text="#{scenario.photo-by-1}"></span>
+						<cite title="photo credits"><a th:href="${scenario.imgCredits}" target="_blank" th:text="${scenario.authorName}"></a></cite>
+						<span th:text="#{scenario.photo-by-2}"></span>
+						<a href="https://unsplash.com?utm_source=COCTEAU&utm_medium=referral" target="_blank">Unsplash</a>
+					</th:block>
+					<th:block th:unless="${scenario?.authorName}">
+						<span th:text="#{scenario.photo-generic-credits}"></span>
+						<cite title="photo credits"><a th:href="${scenario.imgCredits}" target="_blank">link</a></cite>
+					</th:block>
+				</footer>
+				<button class="btn btn-primary" data-target="#scenarioModal" data-toggle="modal" th:text="#{scenario.access-button}"
+				th:attr="data-sid=${scenario.idScenario}, data-secondfeel=${scenario.secondFeelingsGiven}, data-vision=${scenario.hasCreatedAVision}, data-title=${scenario.title}, data-descr=${scenario.description}, data-chall=${scenario.narrative.name}, data-quiz=${scenario.hasCompletedQuiz}, data-feel=${scenario.expressedFeelings}, data-played=${scenario.hasPlayedEnoughMatches},"></button>
+			</div>
+		</div>
+	</body>
+</html>

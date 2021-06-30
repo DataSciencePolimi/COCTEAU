@@ -1,0 +1,95 @@
+#end-button, #end-button:hover {
+	border-color: #fd7e14 !important;
+  	background: #fd7e14 !important;
+  	padding: 0.5rem 1rem !important;
+	font-size: 1rem !important;
+}
+
+#end-button:focus {
+  	box-shadow: 0 0 0 0.2rem rgba(253, 126, 20, 0.5) !important;
+}
+
+.your-group-color {
+	fill: rgba(51, 204, 51, 1) !important;
+}
+
+.btn-group {
+	width: 100%;
+}
+
+.emoji-text {
+	color: white !important;
+}
+
+.vote, .vote:hover {
+	background-color: #6c757d;
+	border-color: #6c757d;
+}
+
+#super_bad_user_bef.selected, #super_bad_user_bef.selected:hover,
+#super_bad_user_aft.selected, #super_bad_user_aft.selected:hover,
+#super_bad_comm_bef.selected, #super_bad_comm_bef.selected:hover,
+#super_bad_comm_aft.selected, #super_bad_comm_aft.selected:hover {
+	background-color: #ED4848;
+	border-color: #ED4848;
+}
+
+#bad_user_bef.selected, #bad_user_bef.selected:hover,
+#bad_user_aft.selected, #bad_user_aft.selected:hover,
+#bad_comm_bef.selected, #bad_comm_bef.selected:hover,
+#bad_comm_aft.selected, #bad_comm_aft.selected:hover {
+	background-color: #FF7800;
+	border-color: #FF7800;
+}
+
+#neutral_user_bef.selected, #neutral_user_bef.selected:hover,
+#neutral_user_aft.selected, #neutral_user_aft.selected:hover,
+#neutral_comm_bef.selected, #neutral_comm_bef.selected:hover,
+#neutral_comm_aft.selected, #neutral_comm_aft.selected:hover {
+	background-color: #FFC400;
+	border-color: #FFC400;
+}
+
+#good_user_bef.selected, #good_user_bef.selected:hover,
+#good_user_aft.selected, #good_user_aft.selected:hover,
+#good_comm_bef.selected, #good_comm_bef.selected:hover,
+#good_comm_aft.selected, #good_comm_aft.selected:hover {
+	background-color: #76D585;
+	border-color: #76D585;
+}
+
+#super_good_user_bef.selected, #super_good_user_bef.selected:hover,
+#super_good_user_aft.selected, #super_good_user_aft.selected:hover,
+#super_good_comm_bef.selected, #super_good_comm_bef.selected:hover,
+#super_good_comm_aft.selected, #super_good_comm_aft.selected:hover {
+	background-color: #42C157;
+	border-color: #42C157;
+}
+
+@media (max-width: 768px) {
+	.show-sm-screen {
+		display: block !important;
+	}
+	
+	.show-lg-screen {
+		display: none !important;
+	}
+	
+	.emoji-text {
+		font-size: 1em !important;
+	}
+}
+
+@media (min-width: 769px) {
+	.show-sm-screen {
+		display: none !important;
+	}
+	
+	.show-lg-screen {
+		display: block !important;
+	}
+	
+	.emoji-text {
+		font-size: 1.2em !important;
+	}
+}

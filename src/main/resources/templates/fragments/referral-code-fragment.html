@@ -1,0 +1,8 @@
+<div class="form-row" th:fragment="referral_code" th:with="referral_codes=${referral_codes}" id="referralCodeFragment">
+	<div class="form-group col-md-4 mt-3">
+		<label for="narrative" th:text="#{scenario-management.referral-code}"></label>
+		<select name="referral_code" id="referral_code" class="form-control">
+				<option th:each="referral_code : ${referral_codes}" th:value="${referral_code.idReferralCode}" th:text="${referral_code.name}">
+		</select>
+	</div>
+</div>

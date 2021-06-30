@@ -1,0 +1,41 @@
+<html>
+<body>
+<section th:fragment="join-buttons">
+	<div class="form-row justify-content-center mt-5 pb-5" id="login-elements">
+		<div class="d-flex flex-column">
+			<form action="/userinfo" method="GET">
+				<button class="btn btn-primary perfect-rounded-circle mx-4 goToScenarios">
+					<i class="fas fa-comments fa-4x"></i>
+				</button>
+				<h2 class="text-center mx-4 my-3 font-weight-bold fixed-size-btn" th:text="#{index.button}"></h2>
+			</form>
+		</div>
+		
+		<div class="d-flex flex-column">
+			<a href="/login">
+				<button class="btn btn-primary perfect-rounded-circle mx-4">
+					<i class="fas fa-sign-in-alt fa-4x"></i>
+				</button>
+			</a>
+			<h2 class="text-center mx-4 my-3 font-weight-bold fixed-size-btn" th:text="#{index.button-login}"></h2>
+		</div>
+		<div class="d-flex flex-column">
+			<button class="btn btn-primary perfect-rounded-circle mx-4" id="change-language">
+				<i class="fas fa-language fa-4x"></i>
+			</button>
+			<h2 class="text-center mx-4 my-3 font-weight-bold fixed-size-btn" th:text="#{index.change-language}"></h2>
+		</div>
+		
+		<div class="d-flex flex-column">
+			<a href="/about">
+				<button class="btn btn-primary perfect-rounded-circle mx-4">
+					<i class="fas fa-question fa-4x"></i>
+				</button>
+			</a>
+			<h2 class="text-center mx-4 my-3 font-weight-bold fixed-size-btn" th:text="#{index.button-more}"></h2>
+		</div>
+	</div>
+
+</section>
+</body>
+</html>

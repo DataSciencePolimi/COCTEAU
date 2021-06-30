@@ -1,0 +1,54 @@
+<html>
+	<body>
+		<div class="col-12 col-sm-11 col-lg-9 col-xl-7 text-center mx-auto" th:fragment="question" th:with="question=${question}, scenarioId=${scenarioId}" id="questionDiv">
+			<form action="/answerQuestion" method="post" id="questionForm">
+			
+				<input type="hidden" name="answer" id="answer" value="0">
+				<input type="hidden" name="quiz_id" id="quiz_id" th:value="${question.quiz.idQuiz}">
+				<input type="hidden" name="question" id="question" th:value="${question.idQuestion}">
+				<input type="hidden" name="scenarioId" id="scenarioId" th:value="${scenarioId}">
+				<input type="hidden" name="toBeShown" id="toBeShown" th:value="${toBeShown}">
+				<input type="hidden" name="language" th:value="#{lang}">
+				
+				<div class="progress mx-auto my-4">
+					<div class="progress-bar progress-bar-striped" role="progressbar" th:style="'width:' + ${progress} + '%;'" aria-valuemin="0" aria-valuemax="100" th:text="${progress}+'%'"></div>
+				</div>
+				
+				<div th:if="${question.showQuestion}" class="mt-2">
+					<div class="row d-flex align-items-center justify-content-center pb-2 mx-3">
+						<span class="fa-stack fa-2x col-12 col-lg-2">
+							<i class="far fa-circle fa-stack-2x fas-btn"></i>
+							<i class="fas fa-list fa-stack-1x fas-btn"></i>
+						</span>
+						<h4 class="font-weight-bolder small-h4 my-2 px-2 col-12 col-lg-6" th:text="${question.questionText}" id="questionTextDiv"></h4>
+					</div>
+					
+					<input type="button" class="btn btn-info my-1 col-10 col-sm-8" th:value="${question.answerOne}" id="answer1"><br>
+					<input type="button" class="btn btn-info my-1 col-10 col-sm-8" th:value="${question.answerTwo}" id="answer2"><br>
+					<input type="button" class="btn btn-info my-1 col-10 col-sm-8" th:value="${question.answerThree}" id="answer3"><br>
+					<input type="button" class="btn btn-info my-1 col-10 col-sm-8" th:value="${question.answerFour}" id="answer4"><br>
+					<input type="button" class="btn btn-info my-1 col-10 col-sm-8" th:value="${question.answerFive}" id="answer5"><br>
+				</div>
+				<div th:if="${question.showCommentQuestion}" class="mt-4">
+					<div class="row d-flex align-items-center justify-content-center pb-2 mx-3">
+						<span class="fa-stack fa-2x col-12 col-lg-2">
+							<i class="far fa-circle fa-stack-2x fas-btn"></i>
+							<i class="fas fa-comment fa-stack-1x fas-btn"></i>
+						</span>
+						<h4 class="font-weight-bolder small-h4 my-2 col-12 col-lg-6" th:text="${question.commentQuestionText}"></h4>
+					</div>
+					<div class="form-group">
+					    <textarea class="input-form form-control my-1 col-10 mx-auto" th:placeholder="#{quiz.text-area-placeholder}" oninput="auto_grow(this)" id="comment" name="comment"></textarea>
+				    </div>
+				</div>
+			</form>
+			
+			<button class="btn btn-primary btn-xl rounded-pill mt-3 mb-4" id="submitButton" form="questionForm" disabled>
+				<div class="d-flex align-items-center">
+					<i class="fas fa-2x fa-check"></i>
+					<span class="ml-2" th:text="#{quiz.submit}"></span>
+				</div>
+			</button>
+		</div>
+	</body>
+</html>

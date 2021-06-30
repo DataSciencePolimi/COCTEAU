@@ -1,0 +1,10 @@
+<html>
+	<body>
+		<th:block th:fragment="content" th:with="scenarios=${scenarios}">
+			<th:block th:each="scenario : ${scenarios}">
+				<div th:if="${scenario.published}" class="content-fluid col-11 col-sm-11 col-md-6 col-lg-6 mt-4" th:insert="fragments/scenario-fragment.html :: content" th:with="scenario=${scenario}">
+				</div>
+			</th:block>
+		</th:block>
+	</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title th:text="#{profile.main-title}"></title>
+<link rel="icon" 
+      type="image/png" 
+      href="appimg/Logo-Fav.png">
+      
+<link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/profile-page.css">
+<link rel="stylesheet" href="css/all.css">
+<link rel="stylesheet" href="css/feed-page.css">
+<script src="https://kit.fontawesome.com/8f38fb007f.js"></script>
+
+</head>
+
+<body>
+	<input type="hidden" th:value="${firstTime}" id="firstTime">
+
+	<div id="firstTimeInfoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredScrollableTitle" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="firstTimeInfoModalTitle" th:text="#{profile.tutorial-title}"></h5>
+					<button type="button" class="close" aria-label="Close" id="x_first_time">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p th:text="#{profile.tutorial-body}"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="close_button_first_time" th:text="#{profile.close-tutorial}"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" tabindex="-1" role="dialog" id="activated_modal">
+		<div class="modal-dialog" role="document">
+	  		<div class="modal-content">
+				<div class="modal-header">
+			      	<h5 class="modal-title" th:text="#{profile.account-box-title}"></h5>
+			      	<button type="button" class="close" aria-label="Close" id="x_activated">
+			        	<span aria-hidden="true">&times;</span>
+			      	</button>
+			    </div>
+			    <div class="modal-body">
+			      	<p th:text="#{profile.account-box-body}"></p>
+			    </div>
+			    <div class="modal-footer">
+			      	<button type="button" class="btn btn-primary" id="close_button_activated" th:text="#{profile.close-account-box}"></button>
+			    </div>
+		  	</div>
+		</div>
+	</div>
+
+	<div class="modal" tabindex="-1" role="dialog" id="editProfileModal">
+		<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<h5 class="modal-title" th:text="#{profile.edit-profile}"></h5>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+		      	<div class="modal-body">
+		        	<form action="/updateUsername" method="post" id="updateUsernameForm" class="mb-2">
+						<label for="usernameTextForm" th:text="#{profile.new-username}"></label>
+						<input class="form-control" type="text" th:value="${user.username}" id="usernameTextForm" name="usernameTextForm">
+						<div class="form-error">
+						    <span class="text-danger" id="username-error" style="display:none"></span>
+					  	</div>
+						<div class="d-flex justify-content-end">
+							<input type="submit" class="btn btn-primary mt-3" value="Update Username" id="SubmitButton">
+						</div>
+					</form>
+					<hr/>
+					<form action="/updatePassword" method="post" id="updatePasswordForm">
+						<label for="oldPasswordTextForm" th:text="#{profile.old-password}"></label>
+						<input class="form-control" type="password" id="oldPasswordTextForm" name="oldPasswordTextForm">
+						<div class="form-error">
+						    <span class="text-danger" id="old-password-error" style="display:none"></span>
+					  	</div>
+						<label for="newPasswordTextForm" class="mt-2" th:text="#{profile.new-password}"></label>
+						<input class="form-control" type="password" id="newPasswordTextForm" name="newPasswordTextForm">
+						<div class="form-error">
+						    <span class="text-danger" id="new-password-error" style="display:none"></span>
+					  	</div>
+						<label for="confirmNewPasswordTextForm" class="mt-2" th:text="#{profile.confirm-new-password}"></label>
+						<input class="form-control" type="password" id="confirmNewPasswordTextForm" name="confirmNewPasswordTextForm">
+						<div class="form-error">
+						    <span class="text-danger" id="confirm-password-error" style="display:none"></span>
+					  	</div>
+						
+						<div id="errorTextField" class="mt-2"></div>
+						<div class="d-flex justify-content-end">
+							<input type="submit" class="btn btn-primary mt-3" value="Update Password" id="SubmitButtonPwd">
+						</div>
+					</form>
+		    	</div>
+	    	</div>
+		</div>
+	</div>
+	
+	<div class="modal" tabindex="-1" role="dialog" id="createProfileModal">
+		<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+      				<h5 class="modal-title" th:text="#{profile.create-profile}"></h5>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+		      	<div class="modal-body">
+		        	<form action="/createProfile" method="post" id="createProfile" class="mb-2">
+						<label for="usernameTextForm" th:text="#{profile.new-username}"></label>
+						<input class="form-control" type="text" id="createUsernameTextForm" name="createUsernameTextForm">
+						<div class="form-error">
+						    <span class="text-danger" id="username-error-creation" style="display:none"></span>
+					  	</div>
+						<label for="newPasswordTextForm" class="mt-2" th:text="#{profile.new-password}"></label>
+						<input class="form-control" type="password" id="createNewPasswordTextForm" name="createNewPasswordTextForm">
+						<div class="form-error">
+						    <span class="text-danger" id="new-password-error-creation" style="display:none"></span>
+					  	</div>
+						<label for="confirmNewPasswordTextForm" class="mt-2" th:text="#{profile.confirm-new-password}"></label>
+						<input class="form-control" type="password" id="createConfirmNewPasswordTextForm" name="createConfirmNewPasswordTextForm">
+						<div class="form-error">
+						    <span class="text-danger" id="confirm-password-error-creation" style="display:none"></span>
+					  	</div>
+						
+						<div id="errorTextField" class="mt-2"></div>
+						<div class="d-flex justify-content-end">
+							<input type="submit" class="btn btn-primary mt-3" value="Create Profile" id="SubmitButtonCreateProfile">
+						</div>
+					</form>
+		    	</div>
+	    	</div>
+		</div>
+	</div>
+	
+	<div class="mt-5 container mx-auto">
+	  	<div class="row justify-content-center">
+	    	<div class="col-11 col-sm-10 col-md-8 col-lg-5" id="profile_picture_div">
+	    		<div th:replace="fragments/profile-fragments.html :: picture" th:with="user=${user}"></div>
+	    	</div>
+		    <div class="col-11 col-sm-10 col-md-8 col-lg-5 mt-3">
+		    	<div th:replace="fragments/profile-fragments.html :: username" th:with="user=${user}"></div>
+		    </div>
+	  	</div>
+	  	<div th:if="${personal}" class="row justify-content-center mt-3">
+	  		<div class="col-11 col-sm-10 col-md-8 col-lg-5">
+	  			<div class="d-flex justify-content-center">
+					<button th:if="${activated}" class="btn btn-primary btn-xl rounded-pill mb-1 mx-1" id="editProfileOpen">
+						<div class="d-flex align-items-center">
+							<i class="fas fa-2x fa-user-cog"></i>
+							<span class="ml-2" th:text="#{profile.edit-profile}"></span>
+						</div>
+					</button>
+					
+					<button th:unless="${activated}" class="btn btn-primary btn-xl rounded-pill mb-1 mx-1" id="createProfileOpen">
+						<div class="d-flex align-items-center">
+							<i class="fas fa-2x fa-user-plus"></i>
+							<span class="ml-2" th:text="#{profile.create-profile}"></span>
+						</div>
+					</button>
+				</div>
+	  		</div>
+	  		<div class="col-11 col-sm-10 col-md-8 col-lg-5 mt-3">
+		    </div>
+	  	</div>
+	</div>
+	
+	<div class="mt-4 container mx-auto">
+		<div class="font-weight-bold mt-3 text-center" th:text="#{profile.latest-visions}"></div>
+		<hr>
+	  	<div class="row justify-content-center">
+	  		<div th:if="${#lists.size(recentVisions) > 0}" th:each="vision : ${recentVisions}" class="col-10 col-sm-10 col-md-5 col-lg-4 p-3 img-div">
+				<img class="img-fluid rounded-lg" th:src="${vision.img}">
+				<div class="tag-div kw-tags">
+					<div class="d-flex justify-content-around">
+						<div th:each="k : ${vision.keywordCollection}" th:text="${k.keyword.keyword}" class="colored-box ellipsis" th:title="${k.keyword.keyword}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:unless="${#lists.size(recentVisions) > 0}" class="my-2 font-weight-bold text-center">
+				<div th:text="#{profile.no-visions}"></div>
+			</div>
+	  	</div>
+	</div>
+	
+	<div class="mt-4 container mx-auto">
+		<div class="font-weight-bold mt-3 text-center" th:text="#{profile.achievements}"></div>
+		<hr>
+		<div class="row justify-content-center px-2 mt-2">
+			<img th:each="ach : ${achievedAchievements}" class="img-fluid col-lg-3 col-md-4 col-sm-5 col-5 m-2 ach-img" th:src="${ach.img}">
+			<img th:each="nach : ${notAchievedAchievements}" class="img-fluid greyscale col-lg-3 col-md-4 col-sm-5 col-5 m-2 ach-img" th:src="${nach.img}">
+		</div>
+	</div>
+	
+	<div th:if="${personal}" class="mb-3 container mx-auto">
+		<div class="row justify-content-center">
+	  		<div th:if="${from}" class="col-11 col-sm-10 col-md-5 col-lg-4 mt-3">
+	  			<div class="d-flex justify-content-center">
+	  				<form action="/feed" method="post" id="feed">
+						<input type="hidden" value="0" id="limit" name="limit">
+						<input type="hidden" name="scenarioId" id="scenarioIdFeed" th:value="${scenarioId}">
+					</form>
+					<button class="btn btn-primary btn-xl rounded-pill mb-1 mx-1" form="feed">
+						<div class="d-flex align-items-center">
+							<i class="fas fa-2x fa-newspaper"></i>
+							<span class="ml-2" th:text="#{profile.feed}"></span>
+						</div>
+					</button>
+				</div>
+  			</div>
+  			<div th:unless="${from}" class="col-11 col-sm-10 col-md-5 col-lg-4 mt-3">
+	  			<div class="d-flex justify-content-center">
+	  				<a href="/scenario">
+						<button class="btn btn-primary btn-xl rounded-pill mb-1 mx-1">
+							<div class="d-flex align-items-center">
+								<i class="fas fa-2x fa-home"></i>
+								<span class="ml-2" th:text="#{profile.scenario}"></span>
+							</div>
+						</button>
+					</a>
+				</div>
+  			</div>
+	  		<div th:if="${activated}" class="col-11 col-sm-10 col-md-5 col-lg-4 mt-3">
+	  			<div class="d-flex justify-content-center">
+	  				<form action="/logout" method="post" id="logout">
+					</form>
+					<button class="btn btn-danger btn-xl rounded-pill mb-1 mx-1" form="logout">
+						<div class="d-flex align-items-center">
+							<i class="fas fa-2x fa-sign-out-alt fa-flip-horizontal"></i>
+							<span class="ml-3" th:text="#{profile.logout}"></span>
+						</div>
+					</button>
+				</div>
+	  		</div>
+  		</div>
+	</div>
+	
+	<div th:unless="${personal}" class="my-3 container mx-auto">
+		<div class="row justify-content-center">
+	  		<div class="col-11 col-sm-10 col-md-5 col-lg-5">
+	  			<div class="d-flex justify-content-center">
+	  				<form action="/feed" method="post" id="feed">
+						<input type="hidden" value="0" id="limit" name="limit">
+						<input type="hidden" name="scenarioId" id="scenarioIdFeed" th:value="${scenarioId}">
+					</form>
+					<button class="btn btn-primary btn-xl rounded-pill mb-1 mx-1" form="feed">
+						<div class="d-flex align-items-center">
+							<i class="fas fa-2x fa-newspaper"></i>
+							<span class="ml-2" th:text="#{profile.feed}"></span>
+						</div>
+					</button>
+				</div>
+  			</div>
+  		</div>
+	</div>
+	
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript"
+		src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/popper.js/1.14.1/umd/popper.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="/js/feedManagement.js"></script>
+	<script th:inline="javascript" src="/js/profile.js"></script>
+	
+	<script th:inline="javascript">
+		$(document).ready(function(){
+			/*<![CDATA[*/
+			var show = /*[[${justActivated}]]*/false;
+			/*]]>*/
+			
+			/*<![CDATA[*/
+			var colors = JSON.parse(/*[[${profileColors}]]*/"[{\"colorBefore\":\"#FFFFFF\"},{\"colorAfter\":\"#FFFFFF\"}]");
+			/*]]>*/
+			
+			$("#borderColor").css("background-image", "linear-gradient(to right top, " + colors[0].colorBefore + "," + colors[1].colorAfter + ")");
+			
+			if(show) {
+				$("#activated_modal").modal('toggle');
+			}
+		})
+	</script>
+
+</body>
+</html>
