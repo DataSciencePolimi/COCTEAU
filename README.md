@@ -1,6 +1,6 @@
 # COCTEAU
 
-<img src="./readme_img/Logo-COCTEAU.png" width="300">
+<img src="./readme_img/Logo-cocteau.png" width="300">
 
 COCTEAU - Co-Creating The EuropeAn Union - is a crowdsourcing tool that has the goal of enabling large-scale citizen engagement and co-creation in support of policymakers. The main goals of COCTEAU align with the need of policymakers for citizen input when approaching complex governance solutions and are:
 
