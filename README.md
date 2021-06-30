@@ -52,10 +52,10 @@ We report the depencies as defined in the `pom.xml` file:
 | `mysql-connector-java`           | `8.0.19`       |         |
 | `commons-collections4`           | `4.4`          |         |
 | `commons-lang3`                  | `3.9`          | &check; |
-| `commons-fileupload`             | `1.3.1`        |         |
+| `commons-fileupload`             | `1.3.3`        |         |
 | `opencsv`                        | `4.1`          |         |
 | `json`                           | `20190722`     |         |
-| `bcprov-jdk15on`                 | `1.65.01`      |         |
+| `bcprov-jdk15on`                 | `1.67`         |         |
 | `bootstrap`                      | `4.4.1`        |         |
 | `jquery`                         | `3.4.1`        |         |
 | `popper.js`                      | `1.14.1`       |         |
