@@ -22,6 +22,17 @@ Challenges are expressed through Scenarios which are either distillations of soc
 
 The emotional component of COCTEAU arises with the creation of Visions. COCTEAU users can create Visions to express their opinion and feelings regarding a Scenario both in visual and textual terms. A Vision is like a post on a social media platform and it comprises a collage of three to four pictures, three keywords, a subjective evaluation of the Scenario dimensions and a comment. Citizens can create Visions freely and share them with other members of the community participating in challenges.
 
+## License  
+
+The research and development of COCTEAU are partially supported by the European Commission under the H2020 framework, within project 822735 [TRIGGER](https://trigger-project.eu) (TRends in Global Governance and Europe's Role) and project 101016233 [PERISCOPE](https://periscopeproject.eu/) (Pan-European Response to the Impacts of COVID-19 and future Pandemics and Epidemics).
+
+The main contributors of this project are [Politecnico di Milano](https://polimi.it) and [CEPS](https://www.ceps.eu).
+
+| <img src="./readme_img/Logo-Polimi.png" width="500"> | <img src="./readme_img/Logo-CEPS.jpg" width="500"> |
+| ------------- | ------------ |
+
+The content of this project is licensed under the [Creative Commons Attribution 3.0 Unported license](https://creativecommons.org/licenses/by/3.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](LICENSE.md).
+
 ## Run it on your machine
 
 ### Stack
@@ -151,16 +162,3 @@ server.ssl.keyAlias = <alias>
 
 ## Documentation
 The documentation for the codebase can be found in the `doc` folder and accessible by viewing the `index.html` file.
-
-## License  
-
-The research and development of COCTEAU are partially supported by the European Commission under the H2020 framework, within project 822735 [TRIGGER](https://trigger-project.eu) (TRends in Global Governance and Europe's Role) and project 101016233 [PERISCOPE](https://periscopeproject.eu/) (Pan-European Response to the Impacts of COVID-19 and future Pandemics and Epidemics).
-
-The main contributors of this project are [Politecnico di Milano](https://polimi.it) and [CEPS](https://www.ceps.eu).
-
-| <img src="./readme_img/Logo-Polimi.png" width="500"> | <img src="./readme_img/Logo-CEPS.jpg" width="500"> |
-| ------------- | ------------ |
-
-
-
-The content of this project is licensed under the [Creative Commons Attribution 3.0 Unported license](https://creativecommons.org/licenses/by/3.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](LICENSE.md).
