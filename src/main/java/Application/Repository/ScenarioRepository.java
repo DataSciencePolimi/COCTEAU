@@ -47,7 +47,7 @@ public interface ScenarioRepository extends JpaRepository<Scenario, Integer>{
 	 * @return	The last group number among the {@link Application.Domain.Scenario}(s).
 	 */
 	@Query(value = "SELECT scenario_group FROM scenario ORDER BY scenario_group DESC LIMIT 1", nativeQuery = true)
-	int findLastScenarioGroup();
+	Optional<Integer> findLastScenarioGroup();
 
 	/**
 	 * Returns the {@link Application.Domain.Quiz} associated with the {@link Application.Domain.Scenario} with the provided group number.

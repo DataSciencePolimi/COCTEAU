@@ -180,7 +180,11 @@ public class ScenarioManagementController {
 		newScenario.setImgCredits(imgCredits);
 		
 		if(scenarioGroup == 0) {
-			scenarioGroup = scenarioRepository.findLastScenarioGroup() + 1;
+			if(scenarioRepository.findLastScenarioGroup().isPresent()) {
+				scenarioGroup = scenarioRepository.findLastScenarioGroup().get() + 1;
+			} else {
+				scenarioGroup = 1;
+			}
 			
 			Quiz newQuiz = new Quiz("temp");
 			
