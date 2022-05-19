@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+<html dir="ltr" lang="it-IT">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<!-- Stylesheets
+	============================================= -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Rubik:ital,wght@0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
+	
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="css/components/bs-rating.css" type="text/css" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/custom.css" type="text/css" />
+	<link rel="stylesheet" href="css/animate.css" type="text/css" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<!-- Document Title
+	============================================= -->
+	<title>Cocteau</title>
+
+	<link rel="icon" type="image/png" href="assets/logo-cocteau-fav.png">
+
+</head>
+<body class="stretched">
+
+	<div th:if="${achievementAchieved != ''}" id="sidenav-achievement" class="sidenav">
+		<h4 id="about" onmouseleave="$(this).css('display', 'none')" th:text="${achievementAchieved}"></h4>
+	</div>
+
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="clearfix">
+	
+		<!-- Header
+		============================================= -->
+		<header id="header">
+			<div id="header-wrap">
+				<div class="container">
+					<div class="header-row">
+
+						<!-- Logo
+						============================================= -->
+						<div id="logo">
+							<a href="/" class="standard-logo"><img src="assets/logo-cocteau.png" alt="Cocteau Logo"></a>
+							<a href="/" class="retina-logo"><img src="assets/logo-cocteau@2x.png" alt="Cocteau Logo"></a>
+						</div><!-- #logo end -->
+
+						<div id="primary-menu-trigger">
+							<svg class="svg-trigger" viewBox="0 0 100 100"><path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path d="m 30,50 h 40"></path><path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg>
+						</div>
+
+						<!-- Primary Navigation
+						============================================= -->
+						<div th:replace="fragments/navigation-fragment.html :: navbar-fragment"></div>
+					</div>
+				</div>
+			</div>
+			<div class="header-wrap-clone"></div>
+		</header><!-- #header end -->
+		<!-- Content
+		============================================= -->
+		<section id="content">
+			<div class="content-wrap  bg-pattern-one pt-3">
+				<div class="container">
+				
+				
+					<!-- best users -->
+					<div class="m-2 mb-4 bg-pattern-three rounded p-3" th:if="${bestAll}">
+						<div class="d-flex justify-content-start align-items-baseline community-header-flex">
+							<h2 class="text-danger title-border-danger" th:text="#{community.best-users-title}"></h2>
+						
+							<!-- users Filter
+							============================================= -->
+							<div class="grid-filter-wrap collapse-users collapse show">
+								<ul class="grid-filter ms-4" data-container="#best-users">
+									<li th:if="${bestWeekly}" th:classappend="${bestWeekly? 'activeFilter' : ''}"><a href="#" data-filter=".weekly" th:text="#{community.weekly}"></a></li>
+									<li th:if="${bestMonthly}" th:classappend="${not bestWeekly and bestMonthly? 'activeFilter' : ''}"><a href="#" data-filter=".monthly" th:text="#{community.monthly}"></a></li>
+									<li th:classappend="${not bestWeekly and not bestMonthly? 'activeFilter' : ''}"><a href="#" data-filter=".alltimes" th:text="#{community.alltimes}"></a></li>
+								</ul><!-- .grid-filter end -->
+							</div>
+							<div type="button" data-bs-toggle="collapse" data-bs-target=".collapse-users" aria-expanded="false" aria-controls="collapse-users" class="flex-grow-1 text-end collapse-control"><i class="fa-solid fa-angle-down text-xxl text-cyan"></i></div>
+						</div>
+						
+						<div class="collapse-users collapse show">
+							<div id="best-users" class="portfolio community-portfolio row grid-container gutter-30 " data-layout="fitRows">
+								
+								<!-- users weekly -->
+								<article th:each="user, i : ${weekly}" th:if="${user != null}" class="portfolio community-portfolio-item col-lg-3 col-sm-6 col-12 community-card weekly">
+									<div class="row ms-1 md-1 mb-3 text-center">
+										<div th:if="${i.count == 1}" class="col-6 p-2 bg-warning d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.champion}"></strong><br />
+											<i class="fa-solid fa-trophy text-white text-xxl"></i><br />
+											<span class="text-white"th:text="${user.points}"></span>
+										</div>
+										<div th:if="${i.count == 2}" class="col-6 p-2 bg-success d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.gamer}"></strong><br />
+											<i class="fa-solid fa-bolt-lightning text-white text-xxl"></i><br />
+											<span class="text-white" th:text="${#lists.size(user.matchPlayerCollection)}"></span>
+										</div>
+										<div th:if="${i.count == 3}" class="col-6 p-2 bg-purple d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.empathetic}"></strong><br />
+											<i class="fa-solid fa-crown text-white text-xxl"></i><br />
+											<span class="text-white" th:text="${user.correctMatches}"></span>
+										</div>
+										<div th:if="${i.count == 4}" class="col-6 p-2 bg-pink d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.influencer}"></strong><br />
+											<i class="fa-solid fa-star-of-life text-white text-xxl"></i><br />
+											<span class="text-white" th:text="${#lists.size(user.visionCollection)}"></span>
+										</div>
+										<div class="col-6 p-2 bg-primary d-flex flex-column align-items-center justify-content-evenly">
+											<img th:src="${user.img}" class="rounded-circle avatar p-2 bg-white" alt="avatar">
+											<br />
+											<span class="text-white ellipsis col-12" th:text="${user.username}"></span>
+										</div>
+									</div>
+								</article>
+								<!-- end users weekly -->
+								<article th:each="user, i : ${monthly}" th:if="${user != null}" class="portfolio community-portfolio-item col-lg-3 col-sm-6 col-12 community-card monthly">
+									<div class="row ms-1 md-1 mb-3 text-center">
+										<div th:if="${i.count == 1}" class="col-6 p-2 bg-warning d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.champion}"></strong><br />
+											<i class="fa-solid fa-trophy text-white text-xxl"></i><br />
+											<span class="text-white"th:text="${user.points}"></span>
+										</div>
+										<div th:if="${i.count == 2}" class="col-6 p-2 bg-success d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.gamer}"></strong><br />
+											<i class="fa-solid fa-bolt-lightning text-white text-xxl"></i><br />
+											<span class="text-white" th:text="${#lists.size(user.matchPlayerCollection)}"></span>
+										</div>
+										<div th:if="${i.count == 3}" class="col-6 p-2 bg-purple d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.empathetic}"></strong><br />
+											<i class="fa-solid fa-crown text-white text-xxl"></i><br />
+											<span class="text-white" th:text="${user.correctMatches}"></span>
+										</div>
+										<div th:if="${i.count == 4}" class="col-6 p-2 bg-pink d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.influencer}"></strong><br />
+											<i class="fa-solid fa-star-of-life text-white text-xxl"></i><br />
+											<span class="text-white" th:text="${#lists.size(user.visionCollection)}"></span>
+										</div>
+										<div class="col-6 p-2 bg-primary d-flex flex-column align-items-center justify-content-evenly">
+											<img th:src="${user.img}" class="rounded-circle avatar p-2 bg-white" alt="avatar">
+											<br />
+											<span class="text-white ellipsis col-12" th:text="${user.username}"></span>
+										</div>
+									</div>
+								</article>
+								
+								<article th:each="user, i : ${alltimes}" th:if="${user != null}" class="portfolio community-portfolio-item col-lg-3 col-sm-6 col-12 community-card alltimes">
+									<div class="row ms-1 md-1 mb-3 text-center">
+										<div th:if="${i.count == 1}" class="col-6 p-2 bg-warning d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.champion}"></strong><br />
+											<i class="fa-solid fa-trophy text-white text-xxl"></i><br />
+											<span class="text-white"th:text="${user.points}"></span>
+										</div>
+										<div th:if="${i.count == 2}" class="col-6 p-2 bg-success d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.gamer}"></strong><br />
+											<i class="fa-solid fa-bolt-lightning text-white text-xxl"></i><br />
+											<span class="text-white" th:text="${#lists.size(user.matchPlayerCollection)}"></span>
+										</div>
+										<div th:if="${i.count == 3}" class="col-6 p-2 bg-purple d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.empathetic}"></strong><br />
+											<i class="fa-solid fa-crown text-white text-xxl"></i><br />
+											<span class="text-white" th:text="${user.correctMatches}"></span>
+										</div>
+										<div th:if="${i.count == 4}" class="col-6 p-2 bg-pink d-flex flex-column align-items-center justify-content-evenly">
+											<strong class="text-white" th:text="#{community.influencer}"></strong><br />
+											<i class="fa-solid fa-star-of-life text-white text-xxl"></i><br />
+											<span class="text-white" th:text="${#lists.size(user.visionCollection)}"></span>
+										</div>
+										<div class="col-6 p-2 bg-primary d-flex flex-column align-items-center justify-content-evenly">
+											<img th:src="${user.img}" class="rounded-circle avatar p-2 bg-white" alt="avatar">
+											<br />
+											<span class="text-white ellipsis col-12" th:text="${user.username}"></span>
+										</div>
+									</div>
+								</article>
+								
+							</div>
+						</div>
+					</div>
+					
+					<!-- end best users -->
+					
+					
+					<!-- best visions -->
+					<div class="m-2 mb-4 bg-pattern-three rounded p-3" th:if="${bestAll}">
+						<div class="d-flex justify-content-start align-items-baseline community-header-flex ">
+							<h2 class="text-danger title-border-danger" th:text="#{community.most-played-visions}"></h2>
+						
+							<!-- visions Filter
+							============================================= -->
+							<div class="grid-filter-wrap collapse-visions collapse show">
+								<ul class="grid-filter ms-4" data-container="#best-visions">
+									<li th:if="${mostWeekly}" th:classappend="${mostWeekly? 'activeFilter' : ''}"><a href="#" data-filter=".weekly" th:text="#{community.weekly}"></a></li>
+									<li th:if="${mostMonthly}" th:classappend="${not mostWeekly and mostMonthly? 'activeFilter' : ''}"><a href="#" data-filter=".monthly" th:text="#{community.monthly}"></a></li>
+									<li th:classappend="${not mostWeekly and not mostMonthly? 'activeFilter' : ''}"><a href="#" data-filter=".alltimes" th:text="#{community.alltimes}"></a></li>
+								</ul><!-- .grid-filter end -->
+							</div>
+							<div  type="button" data-bs-toggle="collapse" data-bs-target=".collapse-visions" aria-expanded="false" aria-controls="collapse-users" class="flex-grow-1 text-end collapse-control"><i class="fa-solid fa-angle-down text-xxl text-cyan"></i></div>
+						</div>
+						
+					
+						<div class="collapse-visions collapse show">
+							<div id="best-visions" class="portfolio community-portfolio row grid-container gutter-30" data-layout="fitRows">
+								
+								<!-- visions weekly -->
+								<article th:each="vision : ${mostPlayedWeek}" class="portfolio community-portfolio-item col-lg-3 col-sm-6 col-12 weekly">
+									<div class="grid-inner">
+										<div class="flip-card not-square text-center">
+											<div class="flip-card-front " >
+												<div class="flip-card-inner">
+													<div class="card bg-primary border-0 text-center">
+														<div class="card-body">
+															<img th:src="${vision.img}" alt="alt tag" class="rounded">
+															<strong class="d-block text-center text-xl" th:text="${#lists.size(vision.matchOpponentCollection)}"></strong>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="flip-card-back no-after bg-primary">
+												<div class="flip-card-inner padding-fci">
+													<div th:each="k, i : ${vision.keywordCollection}" th:text="${k.keyword.keyword}" class="keyword mx-auto" th:title="${k.keyword.keyword}"></div>
+													<!-- <div class="desc p-2" th:text="${vision.description}"></div> -->
+													<img th:if="${vision.user.username != vision.user.cookie and vision.user.cookie != '00000000000000000000'}" th:src="${vision.user.img}" class="rounded-circle avatar" alt="avatar">
+												</div>
+											</div>
+										</div>
+									</div>
+								</article>
+								<!-- end visions weekly -->
+								<!-- visions monhtly -->
+								<article th:each="vision : ${mostPlayedMonth}" class="portfolio community-portfolio-item col-lg-3 col-sm-6 col-12 monthly">
+									<div class="grid-inner">
+										<div class="flip-card not-square text-center">
+											<div class="flip-card-front " >
+												<div class="flip-card-inner">
+													<div class="card bg-primary border-0 text-center">
+														<div class="card-body">
+															<img th:src="${vision.img}" alt="alt tag" class="rounded">
+															<strong class="d-block text-center text-xl" th:text="${#lists.size(vision.matchOpponentCollection)}"></strong>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="flip-card-back no-after bg-primary">
+												<div class="flip-card-inner padding-fci">
+													<div th:each="k, i : ${vision.keywordCollection}" th:text="${k.keyword.keyword}" class="keyword mx-auto" th:title="${k.keyword.keyword}"></div>
+													<!-- <div class="desc p-2" th:text="${vision.description}"></div> -->
+													<img th:if="${vision.user.username != vision.user.cookie and vision.user.cookie != '00000000000000000000'}" th:src="${vision.user.img}" class="rounded-circle avatar" alt="avatar">
+												</div>
+											</div>
+										</div>
+									</div>
+								</article>
+								<!-- end visions weekly -->
+								<article th:each="vision : ${mostPlayedAll}" class="portfolio community-portfolio-item col-lg-3 col-sm-6 col-12 alltimes">
+									<div class="grid-inner">
+										<div class="flip-card not-square text-center">
+											<div class="flip-card-front " >
+												<div class="flip-card-inner">
+													<div class="card bg-primary border-0 text-center">
+														<div class="card-body">
+															<img th:src="${vision.img}" alt="alt tag" class="rounded">
+															<strong class="d-block text-center text-xl" th:text="${#lists.size(vision.matchOpponentCollection)}"></strong>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="flip-card-back no-after bg-primary">
+												<div class="flip-card-inner padding-fci">
+													<div th:each="k, i : ${vision.keywordCollection}" th:text="${k.keyword.keyword}" class="keyword mx-auto" th:title="${k.keyword.keyword}"></div>
+													<!-- <div class="desc p-2" th:text="${vision.description}"></div> -->
+													<img th:if="${vision.user.username != vision.user.cookie and vision.user.cookie != '00000000000000000000'}" th:src="${vision.user.img}" class="rounded-circle avatar" alt="avatar">
+												</div>
+											</div>
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+					</div>
+					<!-- end best visons -->
+					
+					
+					
+					<!-- leaderboard -->
+					<div class="m-2 mb-4 bg-pattern-three rounded p-3" th:if="${bestAll}">
+						<div class="d-flex justify-content-start align-items-baseline community-header-flex mb-4">
+							<h2 class="text-danger title-border-danger" th:text="#{community.leaderboard}"></h2>
+						
+							<!-- users Filter
+							============================================= -->
+							<div class="grid-filter-wrap collapse-leaderboard collapse show">
+								<ul class="grid-filter ms-4" data-container="#leaderboard">
+									<li th:if="${leadWeekly}" th:classappend="${leadWeekly? 'activeFilter' : ''}" class="activeFilter"><a href="#" data-filter=".weekly" th:text="#{community.weekly}"></a></li>
+									<li th:if="${leadMonthly}" th:classappend="${not leadWeekly and leadMonthly? 'activeFilter' : ''}"><a href="#" data-filter=".monthly" th:text="#{community.monthly}"></a></li>
+									<li th:classappend="${not leadWeekly and not leadMonthly? 'activeFilter' : ''}"><a href="#" data-filter=".alltime" th:text="#{community.alltimes}"></a></li>
+								</ul><!-- .grid-filter end -->
+							</div>
+							<div type="button" data-bs-toggle="collapse" data-bs-target=".collapse-leaderboard" aria-expanded="false" aria-controls="collapse-users" class="flex-grow-1 text-end collapse-control"><i class="fa-solid fa-angle-down text-xxl text-cyan"></i></div>
+						</div>
+						
+						
+						<div class="collapse-leaderboard collapse show">
+							<div id="leaderboard" class="portfolio community-portfolio row grid-container gutter-30" data-layout="fitRows">
+								<!-- leaderboard weekly -->
+								<div class="portfolio community-portfolio-item weekly">
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="row">
+												<div th:each="pos, i : ${leaderboardWeek}" th:if="${i.count < 4}" th:classappend="${i.count == 1}? 'col-12' : 'col-sm-6'">
+													<article class="community-card ">
+														<div class="row ms-1 md-1 mb-3 text-center">
+															<div class="col-6 p-3 bg-gold d-flex flex-column align-items-center justify-content-around" th:classappend="|${i.count == 1? 'bg-gold' : ''} + ${i.count == 2? 'bg-silver' : ''} + ${i.count == 3? 'bg-bronze' : ''}|">
+																<i class="pt-2 fa-solid fa-medal text-white text-xxl"></i><br />
+																<strong th:if="${i.count == 1}" class="text-white text-xl" th:text="#{community.gold}"></strong>
+																<strong th:if="${i.count == 2}" class="text-white text-xl" th:text="#{community.silver}"></strong>
+																<strong th:if="${i.count == 3}" class="text-white text-xl" th:text="#{community.bronze}"></strong>
+																<br />
+																<div class="col-md-4 d-flex align-items-center justify-content-center rounded-right">
+																	<i class="fa-solid fa-trophy text-white text-xl me-2"></i> <strong class="text-white" th:text="${pos.points}"></strong>
+																</div>
+															</div>
+															<div class="col-6 p-2 bg-primary d-flex flex-column align-items-center justify-content-center">
+																<img th:src="${pos.img}" class="rounded-circle avatar p-2 bg-white" alt="avatar">
+																<br />
+																<span th:text="${pos.username}" class="text-white ellipsis col-12"></span>
+															</div>
+														</div>
+													</article>								
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<article class="community-card" th:each="pos, i : ${leaderboardWeek}" th:if="${i.count > 3}">
+												<div class="row ms-1 md-1 mb-3 text-center">
+													<div class="col-md-2 p-2 bg-cyan-full d-flex flex-column align-items-center justify-content-center">
+														<strong class="text-white text-xxl" th:text="${i.count}"></strong>
+													</div>
+													<div class="col-md-2 bg-primary d-flex flex-column align-items-center justify-content-center">
+														<img th:src="${pos.img}" class="rounded-circle avatar p-1 m-2 bg-white" alt="avatar">
+													</div>
+													<div class="col-md-4 bg-primary d-flex flex-column align-items-center justify-content-center">
+														<span class="text-white ellipsis col-12" th:text="${pos.username}"></span>
+													</div>
+													<div class="col-md-4 bg-primary d-flex align-items-center justify-content-center rounded-right">
+														<i class="fa-solid fa-trophy text-white text-xl me-2"></i> <strong class="text-white" th:text="${pos.points}"></strong>
+													</div>
+												</div>
+											</article>	
+										</div>
+									</div>
+								</div>
+								<!-- end leaderboard weekly -->
+								<!-- leaderboard monthly -->
+								<div class="portfolio community-portfolio-item monthly">
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="row">
+												<div th:each="pos, i : ${leaderboardMonth}" th:if="${i.count < 4}" th:classappend="${i.count == 1}? 'col-12' : 'col-sm-6'">
+													<article class="community-card ">
+														<div class="row ms-1 md-1 mb-3 text-center">
+															<div class="col-6 p-3 bg-gold d-flex flex-column align-items-center justify-content-around" th:classappend="|${i.count == 1? 'bg-gold' : ''} + ${i.count == 2? 'bg-silver' : ''} + ${i.count == 3? 'bg-bronze' : ''}|">
+																<i class="pt-2 fa-solid fa-medal text-white text-xxl"></i><br />
+																<strong th:if="${i.count == 1}" class="text-white text-xl" th:text="#{community.gold}"></strong>
+																<strong th:if="${i.count == 2}" class="text-white text-xl" th:text="#{community.silver}"></strong>
+																<strong th:if="${i.count == 3}" class="text-white text-xl" th:text="#{community.bronze}"></strong>
+																<br />
+																<div class="col-md-4 d-flex align-items-center justify-content-center rounded-right">
+																	<i class="fa-solid fa-trophy text-white text-xl me-2"></i> <strong class="text-white" th:text="${pos.points}"></strong>
+																</div>
+															</div>
+															<div class="col-6 p-2 bg-primary d-flex flex-column align-items-center justify-content-center">
+																<img th:src="${pos.img}" class="rounded-circle avatar p-2 bg-white" alt="avatar">
+																<br />
+																<span th:text="${pos.username}" class="text-white ellipsis col-12"></span>
+															</div>
+														</div>
+													</article>								
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<article class="community-card" th:each="pos, i : ${leaderboardMonth}" th:if="${i.count > 3}">
+												<div class="row ms-1 md-1 mb-3 text-center">
+													<div class="col-md-2 p-2 bg-cyan-full d-flex flex-column align-items-center justify-content-center">
+														<strong class="text-white text-xxl" th:text="${i.count}"></strong>
+													</div>
+													<div class="col-md-2 bg-primary d-flex flex-column align-items-center justify-content-center">
+														<img th:src="${pos.img}" class="rounded-circle avatar p-1 m-2 bg-white" alt="avatar">
+													</div>
+													<div class="col-md-4 bg-primary d-flex flex-column align-items-center justify-content-center">
+														<span class="text-white ellipsis col-12" th:text="${pos.username}"></span>
+													</div>
+													<div class="col-md-4 bg-primary d-flex align-items-center justify-content-center rounded-right">
+														<i class="fa-solid fa-trophy text-white text-xl me-2"></i> <strong class="text-white" th:text="${pos.points}"></strong>
+													</div>
+												</div>
+											</article>	
+										</div>
+									</div>
+								</div>
+								<!-- end leaderboard monthly -->
+								<div class="portfolio community-portfolio-item alltime">
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="row">
+												<div th:each="pos, i : ${leaderboardAll}" th:if="${i.count < 4}" th:classappend="${i.count == 1}? 'col-12' : 'col-sm-6'">
+													<article class="community-card ">
+														<div class="row ms-1 md-1 mb-3 text-center">
+															<div class="col-6 p-3 bg-gold d-flex flex-column align-items-center justify-content-around" th:classappend="|${i.count == 1? 'bg-gold' : ''} + ${i.count == 2? 'bg-silver' : ''} + ${i.count == 3? 'bg-bronze' : ''}|">
+																<i class="pt-2 fa-solid fa-medal text-white text-xxl"></i><br />
+																<strong th:if="${i.count == 1}" class="text-white text-xl" th:text="#{community.gold}"></strong>
+																<strong th:if="${i.count == 2}" class="text-white text-xl" th:text="#{community.silver}"></strong>
+																<strong th:if="${i.count == 3}" class="text-white text-xl" th:text="#{community.bronze}"></strong>
+																<br />
+																<div class="col-md-4 d-flex align-items-center justify-content-center rounded-right">
+																	<i class="fa-solid fa-trophy text-white text-xl me-2"></i> <strong class="text-white" th:text="${pos.points}"></strong>
+																</div>
+															</div>
+															<div class="col-6 p-2 bg-primary d-flex flex-column align-items-center justify-content-center">
+																<img th:src="${pos.img}" class="rounded-circle avatar p-2 bg-white" alt="avatar">
+																<br />
+																<span th:text="${pos.username}" class="text-white ellipsis col-12"></span>
+															</div>
+														</div>
+													</article>								
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<article class="community-card" th:each="pos, i : ${leaderboardAll}" th:if="${i.count > 3}">
+												<div class="row ms-1 md-1 mb-3 text-center">
+													<div class="col-md-2 p-2 bg-cyan-full d-flex flex-column align-items-center justify-content-center">
+														<strong class="text-white text-xxl" th:text="${i.count}"></strong>
+													</div>
+													<div class="col-md-2 bg-primary d-flex flex-column align-items-center justify-content-center">
+														<img th:src="${pos.img}" class="rounded-circle avatar p-1 m-2 bg-white" alt="avatar">
+													</div>
+													<div class="col-md-4 bg-primary d-flex flex-column align-items-center justify-content-center">
+														<span class="text-white ellipsis col-12" th:text="${pos.username}"></span>
+													</div>
+													<div class="col-md-4 bg-primary d-flex align-items-center justify-content-center rounded-right">
+														<i class="fa-solid fa-trophy text-white text-xl me-2"></i> <strong class="text-white" th:text="${pos.points}"></strong>
+													</div>
+												</div>
+											</article>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end leaderboard -->
+					
+					<div class="m-2 mb-4 bg-pattern-three rounded p-3" th:if="${not bestAll}">
+						<div class="d-flex justify-content-center align-items-baseline community-header-flex mb-4">
+							<h2 class="text-danger" th:text="#{community.nothing-to-see}"></h2>
+						</div>
+					</div>
+					
+					<!-- trends -->
+					<!-- <div class="m-2 mb-4 bg-pattern-three rounded p-3">
+						<div class="d-flex justify-content-start align-items-baseline community-header-flex">
+							<h2 class="text-danger title-border-danger">Trends</h2>
+						
+							users Filter
+							=============================================
+							<div class="grid-filter-wrap">
+								<ul class="grid-filter ms-4 collapse-trends collapse show" data-container="#trends">
+									<li class="activeFilter"><a href="#" data-filter=".weekly">Weekly</a></li>
+									<li><a href="#" data-filter=".monthly">Monthly</a></li>
+									<li><a href="#" data-filter="*">All</a></li>
+								</ul>.grid-filter end
+							</div>
+							<div type="button" data-bs-toggle="collapse" data-bs-target=".collapse-trends" aria-expanded="false" aria-controls="collapse-users" class="flex-grow-1 text-end collapse-control"><i class="fa-solid fa-angle-down text-xxl text-cyan"></i></div>
+						</div>
+						
+						<div class="collapse-trends collapse show">
+							<div id="trends" class="portfolio community-portfolio row grid-container gutter-30" data-layout="fitRows">
+								<div class="portfolio community-portfolio-item weekly col-sm-4 text-center" >
+									<h3 class="text-primary m-0">Chart title</h3>
+									<img src="assets/chart-400x345.png" />
+								</div>
+								<div class="portfolio community-portfolio-item weekly col-sm-4 text-center" >
+									<h3 class="text-primary m-0">Chart title</h3>
+									<img src="assets/chart-400x345.png" />
+								</div>
+								<div class="portfolio community-portfolio-item weekly col-sm-4 text-center" >
+									<h3 class="text-primary m-0">Chart title</h3>
+									<img src="assets/chart-400x345.png" />
+								</div>
+								<div class="portfolio community-portfolio-item monthly col-sm-4 text-center" >
+									<h3 class="text-primary m-0">Chart title</h3>
+									<img src="assets/chart-400x345.png" />
+								</div>
+								<div class="portfolio community-portfolio-item monthly col-sm-4 text-center" >
+									<h3 class="text-primary m-0">Chart title</h3>
+									<img src="assets/chart-400x345.png" />
+								</div>
+								<div class="portfolio community-portfolio-item monthly col-sm-4 text-center" >
+									<h3 class="text-primary m-0">Chart title</h3>
+									<img src="assets/chart-400x345.png" />
+								</div>
+							</div>
+							
+						</div>
+					</div> -->
+					<!-- end trends -->
+					
+				</div>
+			</div>
+			
+			
+		</section><!-- #content end -->
+
+
+	
+
+		<!-- START SVG SEPARATOR BOTTOM -->
+		<div class="separator-bottom">
+			<svg class="fusion-waves-opacity-candy" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" viewBox="0 0 1024 216" preserveAspectRatio="none"><path class="st0" d="M1024.1 1.068c-19.4-.5-38.7-1.6-57.7-.3-206.6 15-248.5 126.6-455 143.8-184.8 15.5-285.7-60.9-464.3-41.3-16.9 1.8-32.5 4.4-47.1 7.6l.1 105.2h1024v-215z"></path>
+			<path class="st1" d="M1024.1 20.068c-30.2-1.6-59.6-1.6-86.8.4-206.6 15.1-197.3 122.6-403.9 139.8-184.9 15.5-278.5-58.2-457.1-38.4-28.3 3.2-53.5 8.2-76.2 14.6v79.744h1024V20.068z"></path>
+			<path class="st2" d="M1024.1 46.668c-22.2-.3-43.8.2-64.2 1.7-206.6 15-197.8 112.5-404.4 129.7-184.8 15.5-226.8-51.1-405.4-31.3-54.8 6-104.9 18.3-150 33.7v35.744h1024V46.668z"></path>
+			<path class="st3" d="M1024.1 54.368c-4 .2-8 .4-11.9.7-206.5 15.1-227.9 124.4-434.5 141.6-184.9 15.5-226.3-41.1-404.9-21.3-64 7.2-121.9 20.8-172.7 37.9v3.044h1024V54.368z"></path>
+			</svg>
+		</div>
+		<!-- END SVG SEPARATOR BOTTOM -->		
+		<!-- Footer
+		============================================= -->
+		<footer id="footer">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12">
+								<h3 th:text="#{index.partners}"></h3>
+							</div>
+						</div>
+						<div class="row align-items-center">
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-trigger.png" alt="logo trigger" class="footer-logo">
+							</div>
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-periscope.jpg" alt="logo periscope" class="footer-logo">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12">
+								<h3>Partners</h3>
+							</div>
+						</div>
+						<div class="row align-items-center">
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-polimi.png" alt="logo polimi" class="footer-logo">
+							</div>
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-ceps.jpg" alt="logo ceps" class="footer-logo">
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Copyrights
+			============================================= -->
+			<div id="copyrights">
+				<div class="container">
+
+					<div class="row">
+
+						<div class="text-center">
+							Copyright 2012 – 2022 | <a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a>
+						</div>
+
+					</div>
+
+				</div>
+			</div><!-- #copyrights end -->
+		</footer><!-- #footer end -->
+		
+	</div><!-- #wrapper end -->
+	
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop"><i class="fa-solid fa-angle-up"></i></div>
+
+	<!-- JavaScripts
+	============================================= -->
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.easing.js"></script>
+	<script src="js/plugins.bootstrap.js"></script>
+	<script src="js/plugins.toggles.js"></script>
+	<script src="js/plugins.isotope.js"></script>
+	<script src="js/plugins.lightbox.js"></script>
+	<script src="js/plugins.hoveranimation.js"></script>
+	<script src="js/plugins.tabs.js"></script>
+	<script src="js/plugins.carousel.js"></script>
+	<script src="js/plugins.gridfilter.js"></script>
+	
+	<script src="js/components/star-rating.js"></script>
+	
+	<script src="js/functions.js"></script>
+
+	<!-- font awesome
+	============================================= -->
+	<script src="https://kit.fontawesome.com/35ca551be3.js" crossorigin="anonymous"></script>
+	
+	<!-- Custom Scripts
+	============================================= -->
+	<script src="js/custom.js"></script>
+</body>
+</html>

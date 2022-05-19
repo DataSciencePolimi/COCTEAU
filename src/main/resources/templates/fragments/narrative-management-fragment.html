@@ -1,8 +1,0 @@
-<div class="form-row" th:fragment="narrative" th:with="narratives=${narratives}" id="narrativeCreationFragment">
-	<div class="form-group col-md-4 mt-3">
-		<label for="narrative" th:text="#{scenario-management.narrative}"></label>
-		<select name="narrative" id="narrative" class="form-control">
-				<option th:each="narrative : ${narratives}" th:data-lang="${narrative.lang}" th:value="${narrative.idNarrative}" th:data-name="${narrative.name}" th:text="@{${narrative.lang} + ' - ' + ${narrative.name}}">
-		</select>
-	</div>
-</div>

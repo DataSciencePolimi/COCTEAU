@@ -1,0 +1,734 @@
+
+<!DOCTYPE html>
+<html dir="ltr" lang="it-IT">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<!-- Stylesheets
+	============================================= -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Rubik:ital,wght@0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
+	
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="css/components/bs-rating.css" type="text/css" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/custom.css" type="text/css" />
+	<link rel="stylesheet" href="css/animate.css" type="text/css" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<!-- Document Title
+	============================================= -->
+	<title>Cocteau</title>
+
+	<link rel="icon" type="image/png" href="assets/logo-cocteau-fav.png">
+
+</head>
+<body class="stretched">
+
+	<div th:if="${achievementAchieved != '' or pointsEarned != ''}" id="sidenav-achievement" class="sidenav">
+		<h4 th:if="${achievementAchieved != ''}" id="about" onmouseleave="$(this).css('display', 'none'); $('.top-points').removeClass('top-points')" th:text="${achievementAchieved}"></h4>
+		<h4 th:classappend="${achievementAchieved != ''}? 'top-points' : ''" th:if="${pointsEarned != ''}" id="points" onmouseleave="$(this).css('display', 'none')" th:text="${pointsEarned}"></h4>
+	</div>
+
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="clearfix">
+	
+		<!-- Header
+		============================================= -->
+		<header id="header">
+			<div id="header-wrap">
+				<div class="container">
+					<div class="header-row">
+
+						<!-- Logo
+						============================================= -->
+						<div id="logo">
+							<a href="/" class="standard-logo"><img src="assets/logo-cocteau.png" alt="Cocteau Logo"></a>
+							<a href="/" class="retina-logo"><img src="assets/logo-cocteau@2x.png" alt="Cocteau Logo"></a>
+						</div><!-- #logo end -->
+
+						<div id="primary-menu-trigger">
+							<svg class="svg-trigger" viewBox="0 0 100 100"><path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path d="m 30,50 h 40"></path><path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg>
+						</div>
+
+						<!-- Primary Navigation
+						============================================= -->
+						<div th:replace="fragments/navigation-fragment.html :: navbar-fragment" th:with="logged=${logged}"></div>
+					</div>
+				</div>
+			</div>
+			<div class="header-wrap-clone"></div>
+		</header><!-- #header end -->
+		<!-- Content
+		============================================= -->
+		<section id="content">
+
+			<div class="tabs tabs-alt tabs-justify clearfix" id="scenario-tabs">
+			
+				<div class="title-wrap">
+					<div class="container">
+						<div class="row align-items-center ">
+
+							<div class="col-md-12">
+								<div class="heading-block">
+									<h1 th:utext="${narrative.name} + ': ' + ${currentScenario.infoTitle}"></h1>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				
+				<!-- Scenario tabs -->
+
+				<div class="sticky-tabs">
+					<div class="container">
+					<ul class="tab-nav clearfix">
+						<li class="active"><a href="#scenario-feed" th:utext="#{scenario.feed-nav}"></a></li>
+						<li><a href="#scenario-your-vision" th:utext="#{scenario.your-vision-nav}"></a></li>
+						<li><a href="#scenario-quiz" th:utext="#{scenario.quiz-nav}"></a></li>
+						<li><a href="#scenario-challenge" th:utext="#{scenario.challenge-nav}"></a></li>
+					</ul>
+					</div>
+				</div>
+				<!-- end scenario tabs -->
+				
+				<div class="content-wrap bg-pattern-one">
+
+					<div class="section">
+			
+						<div class="tab-container">
+
+							<!-- TAB Scenario feed -->
+							<div class="tab-content clearfix" id="scenario-feed">
+								<div class="container">
+									<div class="tab-inner">
+									<h2 class="text-danger d-lg-none">Feed</h2>
+									<p th:text="#{scenario.feed-text}"></p>
+									<div class="grid-filter-wrap">
+
+										<!-- Scenarios Filter
+										============================================= -->
+										<ul class="grid-filter" data-container="#scenarios">
+											<li class="activeFilter"><a href="#" data-filter=".recent" th:text="#{scenario.filter-recent}"></a></li>
+											<li th:if="${#lists.size(topVisions) > 0}"><a href="#" data-filter=".top" th:text="#{scenario.filter-top}"></a></li>
+											<li th:if="${playable}"><a href="#" data-filter=".not-played" th:text="#{scenario.filter-not-played}"></a></li>
+										</ul>
+
+									</div>
+
+									<!-- Scenarios Items
+									============================================= -->
+									
+									<div id="scenarios" class="portfolio row grid-container gutter-30" data-layout="fitRows">
+
+										<!-- start scenario feed element -->
+										<article class="portfolio-item col-lg-4 col-sm-6 col-12 recent lorem">
+											<div class="grid-inner bg-primary p-2 rounded">
+												<div class="post-vision align-middle text-center">
+													<a href="#" class="scenario-post-vision" th:utext="#{scenario.post-your-vision}">
+														
+													</a>
+												</div>
+											</div>
+										</article>
+										<!-- end scenario feed element -->
+										<!-- start scenario feed element RECENT-->
+										<article th:each="vision : ${visions}" class="portfolio-item col-lg-4 col-sm-6 col-12 recent" th:classappend="|${#lists.contains(topVisions, vision)? 'top' : ''} + ${vision.showPlayButton? 'not-played' : ''}|">
+											<div class="grid-inner bg-white p-2 rounded">
+												<div class="flip-card text-center">
+													<div class="flip-card-front">
+														<div class="flip-card-inner">
+															<div class="card bg-transparent border-0 text-center">
+																<div class="card-body">
+																	<img th:src="${vision.img}" alt="vision" class="rounded" th:id="'vision-picture-' + ${vision.idVision}" th:data-desc="${vision.description}">
+																</div>
+															</div>
+															<!-- <img th:src="${vision.user.img}" class="rounded-circle avatar" alt="avatar"  th:id="'avatar-user-' + ${vision.idVision}"> -->
+														</div>
+													</div>
+													<div class="flip-card-back no-after bg-primary">
+														<div class="flip-card-inner">
+															<div th:each="k, i : ${vision.keywordCollection}" th:text="${k.keyword.keyword}" class="keyword mx-auto" th:title="${k.keyword.keyword}" th:id="'vision-keyword' + ${i.count} + '-' + ${vision.idVision}"></div>
+															<p th:if="${vision.showPlayButton}"><a href="#" class="button button-red button-xlarge mt-4 challenge-vision" th:id="'vision-challenge-' + ${vision.idVision}" th:utext="#{scenario.challenge}"></a></p>
+															<img th:if="${vision.user.username != vision.user.cookie and vision.user.cookie != '00000000000000000000'}" th:src="${vision.user.img}" class="rounded-circle avatar" alt="avatar" th:id="'back-avatar-user-' + ${vision.idVision}">
+														</div>
+													</div>
+												</div>
+											</div>
+											<form th:if="${vision.user.username != vision.user.cookie and vision.user.cookie != '00000000000000000000'}" action="/profile" method="get" th:id="'profile-user-' + ${vision.idVision}">
+												<input type="hidden" name="entry-number" th:value="${vision.user.entryNumber}">
+											</form>
+										</article>
+										<!-- end scenario feed element -->
+										<!-- start scenario feed element TOP-->
+										<article th:each="vision, i : ${topVisions}" th:unless="${#lists.contains(visions, vision)}" class="portfolio-item col-lg-4 col-sm-6 col-12 top"  th:classappend="${vision.showPlayButton? 'not-played' : ''}">
+											<div class="grid-inner bg-white p-2 rounded">
+												<div class="flip-card text-center">
+													<div class="flip-card-front " >
+														<div class="flip-card-inner">
+															<div class="card bg-transparent border-0 text-center">
+																<div class="card-body">
+																	<img th:src="${vision.img}" alt="vision" class="rounded" th:id="'vision-picture-' + ${vision.idVision}">
+																</div>
+															</div>
+															<!-- <img th:src="${vision.user.img}" class="rounded-circle avatar" alt="avatar" th:id="'avatar-user-' + ${vision.idVision}"> -->
+														</div>
+													</div>
+													<div class="flip-card-back no-after bg-primary">
+														<div class="flip-card-inner">
+															<div th:each="k, i : ${vision.keywordCollection}" th:text="${k.keyword.keyword}" class="keyword mx-auto" th:title="${k.keyword.keyword}" th:id="'vision-keyword' + ${i.count} + '-' + ${vision.idVision}"></div>
+															<p th:if="${vision.showPlayButton}"><a href="#" class="button button-red button-xlarge mt-4 challenge-vision" th:id="'vision-challenge-' + ${vision.idVision}" th:utext="#{scenario.challenge}"></a></p>
+															<img th:if="${vision.user.username != vision.user.cookie and vision.user.cookie != '00000000000000000000'}"  th:src="${vision.user.img}" class="rounded-circle avatar" alt="avatar" th:id="'back-avatar-user-' + ${vision.idVision}">
+														</div>
+													</div>
+												</div>
+											</div>
+											<form th:if="${vision.user.username != vision.user.cookie and vision.user.cookie != '00000000000000000000'}"  action="/profile" method="get" th:id="'profile-user-' + ${vision.idVision}">
+												<input type="hidden" name="entry-number" th:value="${vision.user.entryNumber}">
+											</form>
+										</article>
+										<article th:each="vision, i : ${playableVisions}" th:if="${not #lists.contains(visions, vision) and not #lists.contains(topVisions, vision)}" class="portfolio-item col-lg-4 col-sm-6 col-12 not-played">
+											<div class="grid-inner bg-white p-2 rounded">
+												<div class="flip-card text-center">
+													<div class="flip-card-front " >
+														<div class="flip-card-inner">
+															<div class="card bg-transparent border-0 text-center">
+																<div class="card-body">
+																	<img th:src="${vision.img}" alt="vision" class="rounded" th:id="'vision-picture-' + ${vision.idVision}">
+																</div>
+															</div>
+															<!-- <img th:src="${vision.user.img}" class="rounded-circle avatar" alt="avatar" th:id="'avatar-user-' + ${vision.idVision}"> -->
+														</div>
+													</div>
+													<div class="flip-card-back no-after bg-primary">
+														<div class="flip-card-inner">
+															<div th:each="k, i : ${vision.keywordCollection}" th:text="${k.keyword.keyword}" class="keyword mx-auto" th:title="${k.keyword.keyword}" th:id="'vision-keyword' + ${i.count} + '-' + ${vision.idVision}"></div>
+															<p th:if="${vision.showPlayButton}"><a href="#" class="button button-red button-xlarge mt-4 challenge-vision" th:id="'vision-challenge-' + ${vision.idVision}" th:utext="#{scenario.challenge}"></a></p>
+															<img th:if="${vision.user.username != vision.user.cookie and vision.user.cookie != '00000000000000000000'}"  th:src="${vision.user.img}" class="rounded-circle avatar" alt="avatar" th:id="'back-avatar-user-' + ${vision.idVision}">
+														</div>
+													</div>
+												</div>
+											</div>
+											<form th:if="${vision.user.username != vision.user.cookie and vision.user.cookie != '00000000000000000000'}"  action="/profile" method="get" th:id="'profile-user-' + ${vision.idVision}">
+												<input type="hidden" name="entry-number" th:value="${vision.user.entryNumber}">
+											</form>
+										</article>
+										<!-- end scenario feed element -->
+									</div><!-- #scenarios end -->
+									<form th:if="${loadMore}" action="/scenario" method="GET" id="load-more-scenario">
+										<input type="hidden" name="limit" th:value="${limit}">
+										<input type="hidden" name="idScenario" th:value="${currentScenario.idScenario}">
+										<div class="text-center mt-2">
+											<button form="load-more-scenario" class="button button-red button-xlarge mt-4" th:utext="#{scenario.load-more}"></button>
+										</div>
+									</form>
+									</div>
+								</div>
+							</div>
+							<!-- END TAB Scenario feed -->
+							
+							<!-- TAB Scenario your vision -->
+							<div class="tab-content clearfix" id="scenario-your-vision">
+								<div class="container">
+									<div class="tab-inner">
+										<h2 class="text-danger d-lg-none" th:text="#{scenario.your-vision-title}"></h2>
+										<p th:text="#{scenario.your-vision-text}"></p>
+										<p><a class="button button-cyan" data-bs-toggle="modal" data-bs-target="#how-to-scenario" th:utext="#{scenario.how-to-create-vision}"></a></p>
+										<div class="heading-block">
+											<h4 th:text="#{scenario.step-1}"></h4>
+										</div>
+										<p th:text="#{scenario.layout-keyword}"></p>
+										<div class="row">
+											<div class="row col-lg-2 col-md-3 col-sm-4 mx-auto justify-content-between align-items-center col-12">
+												<div class="form-check-layout offset-1 offset-sm-0 form-check col-lg-12 col-md-12 col-sm-12 col-6 mt-1">
+												  <input class="form-check-input" type="radio" name="postvisiontype" id="layout0_btn" data-layout="0" checked>
+												  <label class="form-check-label" for="layout0_btn" th:text="#{scenario.layout-single}"></label>
+												</div>
+												<div class="form-check-layout form-check col-lg-12 col-md-12 col-sm-12 col-5 mt-1">
+												  <input class="form-check-input" type="radio" name="postvisiontype" id="layout1_btn" data-layout="1">
+												  <label class="form-check-label" for="layout1_btn" th:text="#{scenario.layout-vertical}"></label>
+												</div>
+												<div class="form-check-layout offset-1 offset-sm-0 form-check col-lg-12 col-md-12 col-sm-12 col-6 mt-1">
+												  <input class="form-check-input" type="radio" name="postvisiontype" id="layout2_btn" data-layout="2">
+												  <label class="form-check-label" for="layout2_btn" th:text="#{scenario.layout-horizontal}"></label>
+												</div>
+												<div class="form-check-layout form-check col-lg-12 col-md-12 col-sm-12 col-5 mt-1">
+												  <input class="form-check-input" type="radio" name="postvisiontype" id="layout3_btn" data-layout="3">
+												  <label class="form-check-label" for="layout3_btn" th:text="#{scenario.layout-squared}"></label>
+												</div>
+											</div>
+											<div class="col-lg-4 col-md-8 col-sm-8 mb-2">
+												<div class="grid-0 post mx-auto mt-2">			
+													<div class="item-layout0">
+														<div class="item-content layout-element" data-clicked="mid" id="mid">
+															<div class="img-content"><canvas data-pos="0" data-path=""></canvas></div>
+														</div>
+													</div>
+												</div>
+											
+												<div class="grid-1 post mx-auto mt-2">
+													<div class="item-layout1">
+														<div class="item-content layout-element" data-clicked="left" id="left">
+															<div class="img-content"><canvas data-pos="0" data-path=""></canvas></div>
+														</div>
+													</div>
+													
+													<div class="item-layout1">
+														<div class="item-content layout-element" data-clicked="mid" id="mid">
+															<div class="img-content"><canvas data-pos="1" data-path=""></canvas></div>
+														</div>
+													</div>
+													
+													<div class="item-layout1">
+														<div class="item-content layout-element" data-clicked="right" id="right">
+															<div class="img-content"><canvas data-pos="2" data-path=""></canvas></div>
+														</div>
+													</div>
+												</div>
+											
+												<div class="grid-2 post mx-auto mt-2">
+													<div class="item-layout2">
+														<div class="item-content layout-element" data-clicked="up" id="up">
+															<div class="img-content"><canvas data-pos="0" data-path=""></canvas></div>
+														</div>
+													</div>
+													
+													<div class="item-layout2">
+														<div class="item-content layout-element" data-clicked="center" id="center">
+															<div class="img-content"><canvas data-pos="1" data-path=""></canvas></div>
+														</div>
+													</div>
+													
+													<div class="item-layout2">
+														<div class="item-content layout-element" data-clicked="bottom" id="bottom">
+															<div class="img-content"><canvas data-pos="2" data-path=""></canvas></div>
+														</div>
+													</div>
+												</div>
+											
+												<div class="grid-3 post mx-auto mt-2">
+													<div class="item-layout3">
+														<div class="item-content layout-element" data-clicked="up-left" id="up-left">
+															<div class="img-content"><canvas data-pos="0" data-path=""></canvas></div>
+														</div>
+													</div>
+													
+													<div class="item-layout3">
+														<div class="item-content layout-element" data-clicked="up-right" id="up-right">
+															<div class="img-content"><canvas data-pos="1" data-path=""></canvas></div>
+														</div>
+													</div>
+													
+													<div class="item-layout3">
+														<div class="item-content layout-element" data-clicked="bottom-left" id="bottom-left">
+															<div class="img-content"><canvas data-pos="2" data-path=""></canvas></div>
+														</div>
+													</div>
+													
+													<div class="item-layout3">
+														<div class="item-content layout-element" data-clicked="bottom-right" id="bottom-right">
+															<div class="img-content"><canvas data-pos="3" data-path=""></canvas></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 col-sm-12 mt-4">
+												<div class="mb-3">
+												  <input type="text" class="form-control" th:placeholder="#{scenario.keyword-placeholder}" name="keywordInsertionForm1" id="keywordInsertionForm1" form="formVisionInfo">
+												</div>
+												<div class="mb-3">
+												  <input type="text" class="form-control" th:placeholder="#{scenario.keyword-placeholder}" name="keywordInsertionForm2" id="keywordInsertionForm2" form="formVisionInfo">
+												</div>
+												<div class="mb-3">
+												  <input type="text" class="form-control" th:placeholder="#{scenario.keyword-placeholder}" name="keywordInsertionForm3" id="keywordInsertionForm3" form="formVisionInfo">
+												</div>
+											</div>
+										</div>
+										<div class="row mt-3">
+											<div class="col-lg-6 mt-4">
+												<div class="heading-block">
+													<h4 th:text="#{scenario.step-2}"></h4>
+												</div>
+												<p th:text="#{scenario.motivation}"></p>
+											
+												<textarea class="form-control" rows="5" th:placeholder="#{scenario.thoughts}" name="descriptionInsertionForm" id="descriptionInsertionForm" form="formVisionInfo"></textarea>
+											</div>
+											<div class="col-lg-6 mt-4">
+												<div class="heading-block">
+													<h4 th:text="#{scenario.step-3}"></h4>
+												</div>
+												<p th:text="#{scenario.feelings}"></p>
+												<p class="text-center" th:insert="fragments/sentiment-fragment.html :: sentiment-vision"></p>
+											</div>
+										</div>
+										<div class="text-center mt-4">
+											<button form="formVisionInfo" class="button button-red button-xlarge" id="vision-submit-button" disabled th:utext="#{scenario.submit-vision}"></button>
+										</div>
+										<form action="/saveVision" method="post" class="range-field mt-2" id="formVisionInfo">
+											<input type="hidden" th:value="${currentScenario.idScenario}" name="idScenario">
+											<input type="hidden" name="layoutToUse" id="layoutToUse" value="0">
+											<input type="hidden" name="picturesList" id="picturesList" value="">
+											<input type="hidden" name="feelingsVote" id="feelingsVote" value="0">
+										</form>
+									</div>
+								</div>
+							</div>
+							<!-- END TAB Scenario your vision -->
+							
+							<!-- TAB Scenario quiz -->
+							<div class="tab-content clearfix" id="scenario-quiz" th:data-lang="${lang}">
+								<div class="container">
+									<div class="tab-inner">
+										<h2 class="text-danger d-lg-none">Quiz</h2>
+										<div th:if="${#lists.size(questions) > 0}">
+											<p th:text="#{quiz.text}"></p>
+											<input  class="rating" value="1" max="5" data-step="1" data-size="xs" data-disabled="true">
+											<input  class="rating" value="2" max="5" data-step="1" data-size="xs" data-disabled="true">
+											<input  class="rating" value="3" max="5" data-step="1" data-size="xs" data-disabled="true">
+											<input  class="rating" value="4" max="5" data-step="1" data-size="xs" data-disabled="true">
+											<input  class="rating" value="5" max="5" data-step="1" data-size="xs" data-disabled="true">
+											
+											<form action="/submit-quiz" method="POST" id="quiz-form">
+												<div th:each="question, i : ${questions}">
+													<div class="heading-block mt-5 ml-1">
+														<h4 class="text-primary" th:text="${i.count + ' - ' + question.questionText}"></h4>
+													</div>
+													<input class="rating" max="5" data-step="1" data-size="sm" name="answer">
+													<textarea class="form-control" rows="3" th:placeholder="#{quiz.comment}" name="comment"></textarea>
+												</div>
+												
+												<input type="hidden" name="idScenario" th:value="${currentScenario.idScenario}">
+										
+												<div class="mt-4">
+													<button form="quiz-form" class="button button-red button-xlarge" th:utext="#{quiz.submit}"></button>
+												</div>
+											</form>
+										</div>
+										<div th:unless="${#lists.size(questions) > 0}">
+											<h4 class="text-primary" th:text="#{quiz.already-answered}"></h4>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- END TAB Scenario quiz -->
+							<div class="tab-content clearfix" id="scenario-challenge" th:data-playable="${playable}">
+								<div class="container">
+									<div class="tab-inner" th:if="${playable}">
+										<h2 class="text-danger d-lg-none" th:text="#{challenge.title}"></h2>	
+										<p th:text="#{challenge.text}"></p>
+										<p><a class="button button-cyan" data-bs-toggle="modal" data-bs-target="#how-points-scenario" th:utext="#{challenge.points-assigned-button}"></a></p>
+											
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="heading-block">
+													<h4 class="text-primary text-center" th:text="#{challenge.challenger-image-keywords}"></h4>
+												</div>
+												<p class="text-center">
+													<img id="challenge-picture" th:src="${challengeVision.img}" class="rounded p-3 bg-white" style="width:380px; max-width: 100%;"/>
+												</p>
+												<div class="d-flex justify-content-evenly flex-wrap flex-sm-nowrap">
+													<div th:each="k, i : ${challengeVision.keywordCollection}" th:text="${k.keyword.keyword}" class="ellipsis bg-primary text-white p-3 rounded m-1" th:title="${k.keyword.keyword}" th:id="'challenge-keyword' + ${i.count}"></div>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="heading-block">
+													<h4 class="text-center" th:text="#{challenge.guess-feelings}"></h4>
+												</div>
+												<p class="text-center" th:insert="fragments/sentiment-fragment.html :: sentiment-challenge"></p>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-lg-6 mt-4">
+												<div class="heading-block">
+													<h4 class="text-primary text-center" th:text="#{challenge.challenger-thoughts}"></h4>
+												</div>
+												<p id="challenge-description" th:text="${challengeVision.description}">
+												</p>
+											</div>
+											<div class="col-lg-6 mt-4">
+												<div class="heading-block">
+													<h4 class="text-center" th:text="#{challenge.do-you-agree}"></h4>
+												</div>
+												<textarea name="thoughts" class="form-control" rows="3" form="challenge-form" th:placeholder="#{challenge.what-do-think}"></textarea>
+												<form action="/submit-match" method="POST" id="challenge-form">	
+													<input type="hidden" name="idVision" th:value="${challengeVision.idVision}" id="challenge-vision-id">
+													<input type="hidden" name="idScenario" th:value="${currentScenario.idScenario}">
+													<input type="hidden" name="sentiment" value="0" id="challenge-answer">
+												</form>
+											</div>
+										</div>
+										<div class="text-center mt-4">
+											<button class="button button-red button-xlarge" form="challenge-form" disabled id="challenge-submit-button" th:utext="#{challenge.submit-guess}"></button>
+										</div>
+										
+									</div>
+									<div class="tab-inner" th:unless="${playable}">
+										<h2 class="text-danger d-lg-none" th:text="#{challenge.title}"></h2>	
+										<h4 class="text-primary" th:text="#{challenge.already-played}"></h4>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					
+					<div th:if="${#lists.size(otherScenarios) > 1}" class="container pt-4">
+						<h3 th:text="#{scenario.other-scenarios} + ' ' + ${narrative.name}"></h3>
+												
+						<div id="oc-portfolio" class="owl-carousel portfolio-carousel carousel-widget mb-5" data-pagi="false" data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4" data-nav-prev="<i class='fa-solid fa-angle-left'></i>" data-nav-next="<i class='fa-solid fa-angle-right'></i>">
+							<div th:each="scenario : ${otherScenarios}" class="portfolio-item" th:if="${scenario.idScenario != currentScenario.idScenario}">
+								<form action="/scenario" method="GET" class="mb-0" th:id="${'scenario-' + scenario.idScenario}">
+									<div class="portfolio-image">
+										<img th:src="${scenario.img}" alt="alt tag" class="rounded" th:attr="onclick=|document.getElementById('scenario-${scenario.idScenario}').submit();|" >
+										<input type="hidden" name="idScenario" th:value="${scenario.idScenario}">
+									</div>
+								</form>
+								<div class="portfolio-desc">
+									<h4 th:text="${scenario.title}"></h4>
+								</div>
+							</div>
+						</div>
+						
+						<form action="/" method="get" id="home-bottom">
+							<button class="button button-red" form="home-bottom" th:utext="#{scenario.back-to-index}"></button>
+						</form>
+
+					</div>
+					
+				</div><!-- .content-wrap end -->
+			</div><!-- .tabs end -->
+
+		</section><!-- #content end -->
+
+
+		<!-- Modal scenario info -->
+		<div class="modal fade" id="scenario-info" tabindex="-1" aria-labelledby="ScenarioInfo" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h3 class="modal-title m-0" th:utext="${narrative.name} + ': ' + ${currentScenario.title}"></h3>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+			  <div class="modal-body" th:text="${currentScenario.description}"></div>
+			</div>
+		  </div>
+		</div>
+		<!-- end modal scenario info -->
+			
+		<!-- modal how to create your vision -->
+		<div class="modal fade" id="how-to-scenario" tabindex="-1" aria-labelledby="HowToShenario" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h3 class="modal-title m-0" th:text="#{scenario.how-to-create}"></h3>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+			  <div class="modal-body">
+				<p th:utext="#{scenario.how-to-create-text}"></p>
+			  </div>
+			</div>
+		  </div>
+		</div>		
+		<!-- end modal how to create your vision -->
+		
+		<!-- modal how points are assigneds -->
+		<div class="modal fade" id="how-points-scenario" tabindex="-1" aria-labelledby="how-points-scenario" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h3 class="modal-title m-0" th:text="#{challenge.how-to-assign-points}"></h3>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+			  <div class="modal-body">
+				<p th:utext="#{challenge.how-to-assign-points-text}"></p>
+				<p th:utext="#{challenge.how-to-assign-points-example}"></p>
+			  </div>
+			</div>
+		  </div>
+		</div>		
+		<!-- end modal how to create your vision -->
+		
+		<!-- Change layout modal -->
+		<div class="modal" tabindex="-1" role="dialog" id="change-layout-modal">
+		  	<div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+			        	<h3 class="modal-title m-0" th:text="#{vision.modal-change-layout-title}"></h3>
+			        	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      	</div>
+			      	<div class="modal-body">
+			        	<p class="mb-0" th:text="#{vision.modal-change-layout-body}"></p>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-primary" id="change-layout-yes" th:text="#{vision.modal-change-layout-yes}"></button>
+			        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{vision.modal-change-layout-no}"></button>
+			      	</div>
+			    </div>
+		  	</div>
+		</div>
+		
+		<!-- Image Creation Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><span class="color-def" th:text="#{vision.modal-search}"></span></span><a href="https://unsplash.com?utm_source=COCTEAU&utm_medium=referral" target="_blank">Unsplash</a></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				
+				<div class="modal-body">
+					<div class="d-flex align-items-center" id="search-div">
+						<div class="input-group md-form form-sm form-2 pl-0 pr-1">
+							<input class="form-control my-0 py-1" type="text" th:placeholder="#{vision.modal-search-on}" aria-label="Search" id="search-keyword">
+						  	<div class="input-group-append">
+						  	<button class="btn btn-outline-secondary" type="button" id="search-button">
+						  		<i class="fas fa-search text-grey" aria-hidden="true"></i>
+						  		<span th:text="#{vision.modal-button-search}"></span>
+						  	</button>
+						  </div>
+						</div>
+					</div>
+					
+					<div id="m-body" class="grid mt-2">
+					
+					</div>
+					
+					<div class="text-center">
+						<button id="load-more-unsplash" class="btn btn-primary btn-xl rounded-pill mt-3 mx-auto mb-2" style="display: none" th:text="#{vision.modal-button-load}"></button>
+					</div>
+				</div>
+				
+				<div class="modal-body-mask" id="image-mask">
+					<p class="mb-2 text-center" th:text="#{vision.modal-keep}"></p>
+					<div class="text-center mb-2">
+						<span class="text-center mr-3" th:text="#{vision.modal-size}"></span>
+			          	<input type="radio" name="multRadio" id="multRadio1x" checked>
+			          	<span class="mr-2">1x</span>
+				        <input type="radio" name="multRadio" id="multRadio15x">
+				        <span  class="mr-2">1.5x</span>
+			          	<input type="radio" name="multRadio" id="multRadio2x">
+			          	<span>2x</span>
+					</div>
+					<canvas id='mask-canvas' class="canvas-mask d-block mx-auto mb-2"></canvas>
+				</div>
+				<div class="modal-footer" id="image-modal-footer">
+					<button type="button" class="btn btn-info" th:text="#{vision.modal-preselected-pictures}" id="preselectedPictures"></button>
+					<button type="button" class="btn btn-info search-btn" th:text="#{vision.modal-bottom-search}"></button>
+					<button type="button" class="btn btn-primary updatePic" th:text="#{vision.modal-bottom-choose}"></button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{vision.modal-bottom-close}"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+
+		<!-- START SVG SEPARATOR BOTTOM -->
+		<div class="separator-bottom">
+			<svg class="fusion-waves-opacity-candy" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" viewBox="0 0 1024 216" preserveAspectRatio="none"><path class="st0" d="M1024.1 1.068c-19.4-.5-38.7-1.6-57.7-.3-206.6 15-248.5 126.6-455 143.8-184.8 15.5-285.7-60.9-464.3-41.3-16.9 1.8-32.5 4.4-47.1 7.6l.1 105.2h1024v-215z"></path>
+			<path class="st1" d="M1024.1 20.068c-30.2-1.6-59.6-1.6-86.8.4-206.6 15.1-197.3 122.6-403.9 139.8-184.9 15.5-278.5-58.2-457.1-38.4-28.3 3.2-53.5 8.2-76.2 14.6v79.744h1024V20.068z"></path>
+			<path class="st2" d="M1024.1 46.668c-22.2-.3-43.8.2-64.2 1.7-206.6 15-197.8 112.5-404.4 129.7-184.8 15.5-226.8-51.1-405.4-31.3-54.8 6-104.9 18.3-150 33.7v35.744h1024V46.668z"></path>
+			<path class="st3" d="M1024.1 54.368c-4 .2-8 .4-11.9.7-206.5 15.1-227.9 124.4-434.5 141.6-184.9 15.5-226.3-41.1-404.9-21.3-64 7.2-121.9 20.8-172.7 37.9v3.044h1024V54.368z"></path>
+			</svg>
+		</div>
+		<!-- END SVG SEPARATOR BOTTOM -->		
+		<!-- Footer
+		============================================= -->
+		<footer id="footer">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12">
+								<h3 th:text="#{index.partners}"></h3>
+							</div>
+						</div>
+						<div class="row align-items-center">
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-trigger.png" alt="logo trigger" class="footer-logo">
+							</div>
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-periscope.jpg" alt="logo periscope" class="footer-logo">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12">
+								<h3>Partners</h3>
+							</div>
+						</div>
+						<div class="row align-items-center">
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-polimi.png" alt="logo polimi" class="footer-logo">
+							</div>
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-ceps.jpg" alt="logo ceps" class="footer-logo">
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Copyrights
+			============================================= -->
+			<div id="copyrights">
+				<div class="container">
+
+					<div class="row">
+
+						<div class="text-center">
+							Copyright 2012 – 2022 | <a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a>
+						</div>
+
+					</div>
+
+				</div>
+			</div><!-- #copyrights end -->
+		</footer><!-- #footer end -->
+		
+	</div><!-- #wrapper end -->
+	
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop"><i class="fa-solid fa-angle-up"></i></div>
+
+	<!-- JavaScripts
+	============================================= -->
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.easing.js"></script>
+	<script src="js/plugins.bootstrap.js"></script>
+	<script src="js/plugins.toggles.js"></script>
+	<script src="js/plugins.isotope.js"></script>
+	<script src="js/plugins.lightbox.js"></script>
+	<script src="js/plugins.hoveranimation.js"></script>
+	<script src="js/plugins.tabs.js"></script>
+	<script src="js/plugins.carousel.js"></script>
+	<script src="js/plugins.gridfilter.js"></script>
+	
+	<script type="text/javascript" src="/js/layout/hammer.min.js"></script>
+	<script type="text/javascript" src="/js/layout/muuri.js"></script>
+	<script type="text/javascript" src="/js/layout/post-layout-logic.js"></script>
+	<script type="text/javascript" src="/js/layout/vision-page-canvas.js"></script>
+	<script type="text/javascript" src="/js/layout/vision-page-logic.js"></script>
+	
+	<script src="js/components/star-rating.js"></script>
+	
+	<script src="js/functions.js"></script>
+
+	<!-- font awesome
+	============================================= -->
+	<script src="https://kit.fontawesome.com/35ca551be3.js" crossorigin="anonymous"></script>
+	
+	<!-- Custom Scripts
+	============================================= -->
+	<script src="js/custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html dir="ltr" lang="it-IT">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<!-- Stylesheets
+	============================================= -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Rubik:ital,wght@0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
+	
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="css/components/bs-rating.css" type="text/css" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/custom.css" type="text/css" />
+	<link rel="stylesheet" href="css/animate.css" type="text/css" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<!-- Document Title
+	============================================= -->
+	<title>Cocteau</title>
+
+	<link rel="icon" type="image/png" href="assets/logo-cocteau-fav.png">
+
+</head>
+<body class="stretched">
+
+	<div th:if="${achievementAchieved != ''}" id="sidenav-achievement" class="sidenav">
+		<h4 id="about" onmouseleave="$(this).css('display', 'none')" th:text="${achievementAchieved}"></h4>
+	</div>
+
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="clearfix">
+	
+		<!-- Header
+		============================================= -->
+		<header id="header">
+			<div id="header-wrap">
+				<div class="container">
+					<div class="header-row">
+
+						<!-- Logo
+						============================================= -->
+						<div id="logo">
+							<a href="/" class="standard-logo"><img src="assets/logo-cocteau.png" alt="Cocteau Logo"></a>
+							<a href="/" class="retina-logo"><img src="assets/logo-cocteau@2x.png" alt="Cocteau Logo"></a>
+						</div><!-- #logo end -->
+
+						<div id="primary-menu-trigger">
+							<svg class="svg-trigger" viewBox="0 0 100 100"><path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path d="m 30,50 h 40"></path><path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg>
+						</div>
+
+						<!-- Primary Navigation
+						============================================= -->
+						<div th:replace="fragments/navigation-fragment.html :: navbar-fragment"></div>
+					</div>
+				</div>
+			</div>
+			<div class="header-wrap-clone"></div>
+		</header><!-- #header end -->
+		<!-- Content
+		============================================= -->
+		<section id="content">
+			<div class=" bg-pattern-one pt-5">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-lg-4 mb-3">
+							<div class="m-2 bg-pattern-three rounded p-3 h-100 text-center">
+								<img th:src="${user.img}" class="rounded-circle avatar p-2 bg-cyan" alt="avatar" id="profilePicture">
+								
+								<form th:if="${personal}" action="/updateProfilePicture" method="post" enctype="multipart/form-data" id="updateProfilePict" style="display:none;">
+									<input type="file" name="newProfilePicture" accept="image/*" id="newProfilePicture" required>
+								</form>
+								
+								<h2 class="text-center text-danger title-border-danger" th:text="${user.username}" style="word-wrap: break-word;"></h2>
+								<div class="mb-3 d-flex justify-content-around">
+									<div class="text-center p-2">
+										<i class="fa-solid fa-trophy text-warning text-xxl"></i>
+										<div class="text-primary"><strong th:text="${position} + '°'"></strong></div>
+									</div>
+									<div class="text-center p-2">
+										<!-- <i class="fa-solid fa-treasure-chest text-success text-xxl"></i> -->
+										<i class="fa-solid fa-gamepad text-success text-xxl"></i>
+										<div class="text-primary"><strong th:text="${points} + ' Points'"></strong></div>
+									</div>
+									<!-- <div class="text-center p-2">
+										<i class="fa-solid fa-gamepad text-success text-xxl"></i>
+										<div class="text-primary"><strong th:text="${playedMatches} + ' Matches'"></strong></div>
+									</div> -->
+								</div>
+								
+								<div th:each="achievementList : ${achievements}" class="mb-3 d-flex flex-wrap justify-content-center">
+									<div th:each="achievement, i : ${achievementList}" class="text-center p-2 col-4">
+										<i th:if="${i.index % 3 == 0}" class="fa-solid fa-bahai text-white bg-warning text-xl rounded-circle p-1" th:classappend="${achievement.achieved}? '' : 'greyed'"></i>
+										<i th:if="${i.index % 3 == 1}" class="fa-solid fa-bahai text-white bg-success text-xl rounded-circle p-1" th:classappend="${achievement.achieved}? '' : 'greyed'"></i>
+										<i th:if="${i.index % 3 == 2}" class="fa-solid fa-bahai text-white bg-purple text-xl rounded-circle p-1" th:classappend="${achievement.achieved}? '' : 'greyed'"></i>
+										<div class="text-primary achievement"><strong th:text="${achievement.title}"></strong></div>
+									</div>
+								</div>
+								
+								<div th:each="achievementList : ${notAchievedAchievements}" class="mb-3 d-flex flex-wrap justify-content-center">
+									<div th:each="achievement : ${achievementList}" class="text-center p-2 col-4">
+										<i class="fa-solid fa-bahai text-white bg-purple text-xl rounded-circle p-1 greyed"></i>
+										<div class="text-primary achievement"><strong th:text="${achievement.title}"></strong></div>
+									</div>
+								</div>
+								
+								<form th:if="${logged and personal}" action="/logout-step" method="post" id="logout-form"></form>
+								
+								<button th:if="${logged and personal}" form="logout-form" class="button button-red button-xlarge mt-4"><i class="fa-solid fa-right-from-bracket"></i>  Logout</a></button>
+							</div>
+						</div>
+						<div class="col-lg-8 mb-3">
+							<div class="m-2 bg-transparent-07 rounded p-3 h-100">
+								<h2 class="text-danger title-border-danger" th:text="#{profile.your-visions}"></h2>
+								<div id="scenarios" class="portfolio row grid-container gutter-30" data-layout="fitRows">
+									<!-- start scenario feed element -->
+									<article th:if="${#lists.size(recentVisions) > 0}" th:each="vision : ${recentVisions}" class="portfolio-item col-lg-4 col-sm-6 col-12">
+										<div class="grid-inner bg-white p-2 rounded">
+											<div class="flip-card text-center">
+												<div class="flip-card-front">
+													<div class="flip-card-inner">
+														<div class="card bg-transparent border-0 text-center">
+															<div class="card-body">
+																<img th:src="${vision.img}" alt="vision" class="rounded" th:id="'vision-picture-' + ${vision.idVision}" th:data-desc="${vision.description}">
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="flip-card-back no-after bg-primary">
+													<div class="flip-card-inner">
+														<div th:each="k, i : ${vision.keywordCollection}" th:text="${k.keyword.keyword}" class="keyword mx-auto" th:title="${k.keyword.keyword}" th:id="'vision-keyword' + ${i.count} + '-' + ${vision.idVision}"></div>
+														<p th:if="${vision.showPlayButton}"><a href="#" class="button button-red button-xlarge mt-4 challenge-vision" th:id="'vision-challenge-' + ${vision.idVision}" th:utext="#{scenario.challenge}"></a></p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</article>
+									<div th:unless="${#lists.size(recentVisions) > 0}">
+										<h4 class="text-primary text-center" th:text="#{profile.no-visions}"></h4>
+									</div>
+								</div><!-- #scenarios end -->
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section><!-- #content end -->
+
+		<!-- START SVG SEPARATOR BOTTOM -->
+		<div class="separator-bottom">
+			<svg class="fusion-waves-opacity-candy" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" viewBox="0 0 1024 216" preserveAspectRatio="none"><path class="st0" d="M1024.1 1.068c-19.4-.5-38.7-1.6-57.7-.3-206.6 15-248.5 126.6-455 143.8-184.8 15.5-285.7-60.9-464.3-41.3-16.9 1.8-32.5 4.4-47.1 7.6l.1 105.2h1024v-215z"></path>
+			<path class="st1" d="M1024.1 20.068c-30.2-1.6-59.6-1.6-86.8.4-206.6 15.1-197.3 122.6-403.9 139.8-184.9 15.5-278.5-58.2-457.1-38.4-28.3 3.2-53.5 8.2-76.2 14.6v79.744h1024V20.068z"></path>
+			<path class="st2" d="M1024.1 46.668c-22.2-.3-43.8.2-64.2 1.7-206.6 15-197.8 112.5-404.4 129.7-184.8 15.5-226.8-51.1-405.4-31.3-54.8 6-104.9 18.3-150 33.7v35.744h1024V46.668z"></path>
+			<path class="st3" d="M1024.1 54.368c-4 .2-8 .4-11.9.7-206.5 15.1-227.9 124.4-434.5 141.6-184.9 15.5-226.3-41.1-404.9-21.3-64 7.2-121.9 20.8-172.7 37.9v3.044h1024V54.368z"></path>
+			</svg>
+		</div>
+		<!-- END SVG SEPARATOR BOTTOM -->		
+		<!-- Footer
+		============================================= -->
+		<footer id="footer">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12">
+								<h3 th:text="#{index.partners}"></h3>
+							</div>
+						</div>
+						<div class="row align-items-center">
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-trigger.png" alt="logo trigger" class="footer-logo">
+							</div>
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-periscope.jpg" alt="logo periscope" class="footer-logo">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12">
+								<h3>Partners</h3>
+							</div>
+						</div>
+						<div class="row align-items-center">
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-polimi.png" alt="logo polimi" class="footer-logo">
+							</div>
+							<div class="col-md-6 col-12">
+								<img src="assets/logo-ceps.jpg" alt="logo ceps" class="footer-logo">
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Copyrights
+			============================================= -->
+			<div id="copyrights">
+				<div class="container">
+
+					<div class="row">
+
+						<div class="text-center">
+							Copyright 2012 – 2022 | <a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a>
+						</div>
+
+					</div>
+
+				</div>
+			</div><!-- #copyrights end -->
+		</footer><!-- #footer end -->
+		
+	</div><!-- #wrapper end -->
+	
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop"><i class="fa-solid fa-angle-up"></i></div>
+
+	<!-- JavaScripts
+	============================================= -->
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.easing.js"></script>
+	<script src="js/plugins.bootstrap.js"></script>
+	<script src="js/plugins.toggles.js"></script>
+	<script src="js/plugins.isotope.js"></script>
+	<script src="js/plugins.lightbox.js"></script>
+	<script src="js/plugins.hoveranimation.js"></script>
+	<script src="js/plugins.tabs.js"></script>
+	<script src="js/plugins.carousel.js"></script>
+	<script src="js/plugins.gridfilter.js"></script>
+	
+	<script src="js/components/star-rating.js"></script>
+	
+	<script src="js/functions.js"></script>
+
+	<!-- font awesome
+	============================================= -->
+	<script src="https://kit.fontawesome.com/35ca551be3.js" crossorigin="anonymous"></script>
+	
+	<!-- Custom Scripts
+	============================================= -->
+	<script src="js/custom.js"></script>
+</body>
+</html>
