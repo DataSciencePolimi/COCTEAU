@@ -328,7 +328,7 @@ public class ScenarioController {
 		Collection<Question> unansweredQuestions = questionRepository.findUnansweredQuestions(quiz.getIdQuiz(), user_id, lang);
 		
 		if(unansweredQuestions.size() == 0) {
-			if(!userAchievementRepository.findByCookieAndAchievement(user_id,1).isPresent() && (boolean) model.asMap().get("logged")) {
+			if(!userAchievementRepository.findByCookieAndAchievement(user_id,1).isPresent() && model.asMap().containsKey("logged") && (boolean) model.asMap().get("logged")) {
 				AchievementUtils.createAchievement(user_id, userAchievementRepository, 1);
 				model.addAttribute("justAchievedAchievement", 1);
 			}
@@ -340,12 +340,13 @@ public class ScenarioController {
 	@RequestMapping(value = "/submit-match", method = RequestMethod.POST)
 	public String submitMatch(@RequestParam(name = "idScenario", required = false, defaultValue = "0") int idScenario, @CookieValue(value = "user_id", defaultValue = "NULL") String user_id,
 			@RequestParam(name = "sentiment", required = false, defaultValue = "0") int sentiment, @RequestParam(name = "idVision", required = false, defaultValue = "0") int idVision,
-			@RequestParam(name = "thoughts", required = false, defaultValue = "") String thoughts, Model model) {
+			@RequestParam(name = "thoughts", required = false, defaultValue = "") String thoughts, @RequestParam(name = "agree", required = false, defaultValue = "") String agree, Model model) {
 		
 		if(sentiment > 0 && sentiment < 9) {
 			Match match = new Match();
 			Vision vision = visionRepository.findById(idVision).get();
 			
+			match.setAgree(agree);
 			match.setPlayer(new User(user_id));
 			match.setPlayedDate(new Date());
 			match.setThoughts(thoughts);
